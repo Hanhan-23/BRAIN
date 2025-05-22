@@ -1,18 +1,15 @@
 import { Instrument_Sans } from "next/font/google";    
 
-interface iconProps {
-    icon: any
-}
-
 const Footer = () => {
     return (
         <footer className="w-full flex flex-col items-center text-black">
             {/* DIVIDER */}
             <Divider/>
             
-            {/* LOGO */}
-            <div className="flex justify-center place-items-center pt-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#000000" viewBox="0 0 256 256">
+            <div className="md:w-full md:flex md:flex-row md:justify-beetwen">
+                {/* LOGO */}
+            <div className="flex justify-center place-items-center pt-4 lg:pt-8">
+                <svg className="w-16 h-16" xmlns="http://www.w3.org/2000/svg" fill="#000000" viewBox="0 0 256 256">
                     <path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"></path>
                 </svg>
                 <div className="text-2xl font-bold">
@@ -21,7 +18,7 @@ const Footer = () => {
             </div>
 
             {/* NAVIGASI */}
-            <div className="w-full text-xl pt-4 flex flex-col gap-5 items-center">
+            <div className="w-full text-base pt-4 lg:pt-8 flex flex-col gap-5 items-center md:flex-row md:justify-center md:px-2 md:text-sm md:gap-4 lg:text-base">
                 <div>Beranda</div>
                 <div>Tentang</div>
                 <div>Peta Persebaran</div>
@@ -30,7 +27,7 @@ const Footer = () => {
             </div>
             
             {/* 4 ICON FOOTER KONTAK */}
-            <div className="pt-4 flex flex-row gap-2">
+            <div className="pt-4 lg:pt-8 flex flex-row gap-2 md:place-items-center">
                 <IconFoot icon={
                     <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" fill="#1154ED" viewBox="0 0 256 256">
                         <path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"></path>
@@ -57,8 +54,10 @@ const Footer = () => {
             </div>
 
             {/* COPYRIGHT */}
-            <div className="pt-4">
-                © 2023 BRAIN. All Rights Reserved.
+            </div>
+
+            <div className="w-full pt-4 text-base md:text-sm lg:text-base text-center md:pt-6 lg:pt-8">
+                © 2025 BRAIN. Hak Cipta Dilindungi.
             </div>
                 
         </footer>
@@ -71,7 +70,7 @@ const Divider = () => {
     )
 }
 
-const IconFoot = ({icon}: iconProps) => {
+const IconFoot = ({icon}: any) => {
     return (
         <div className="bg-[#DBEAFE] w-8 h-8 rounded-full place-items-center place-content-center p-1">
             {icon}
