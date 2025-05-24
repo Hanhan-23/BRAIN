@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import * as React from "react"
- 
+import { Slider } from "@/components/ui/slider"
 import {
   Select,
   SelectContent,
@@ -30,6 +30,7 @@ const formSchema = z.object({
   jenis: z.string().min(1, { message: "Jenis infrastruktur harus dipilih" }),
   deskripsi: z.string().min(10, { message: "Minimal 10 karakter" }),
   cuaca: z.string().min(1, { message: "Kondisi cuaca harus dipilih" }),
+  persentase: z.number().min(0, { message: "Pilih rentang nilai kerusakan" }),
 })
 
 export default function LaporForm() {
@@ -40,6 +41,7 @@ export default function LaporForm() {
       jenis: "",
       deskripsi: "",
       cuaca: "",
+      persentase: 0,
     },
   })
 
@@ -90,17 +92,17 @@ export default function LaporForm() {
 
 
                 <FormField
-                control={form.control}
-                name="deskripsi"
-                render={({ field }) => (
-                    <FormItem>
-                    <FormLabel>Deskripsi Pengaduan</FormLabel>
-                    <FormControl className="border border-[#CAD5E2]">
-                        <Input className="px-3 py-5" type="input" placeholder="Jalan berlubang penyebab kecelakaan motor kemarin sore  dan sudah satu bulan belum diperbaiki sama sekali" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                    </FormItem>
-                )}
+                  control={form.control}
+                  name="deskripsi"
+                  render={({ field }) => (
+                      <FormItem>
+                      <FormLabel>Deskripsi Pengaduan</FormLabel>
+                      <FormControl className="border border-[#CAD5E2]">
+                          <Input className="px-3 py-5" type="input" placeholder="Jalan berlubang penyebab kecelakaan motor kemarin sore  dan sudah satu bulan belum diperbaiki sama sekali" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                      </FormItem>
+                  )}
                 />
 
                 <FormField
@@ -123,6 +125,21 @@ export default function LaporForm() {
                       <FormMessage />
                     </FormItem>
                   )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name = "persentase"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Nilai Kerusakan</FormLabel>
+                      <div className="flex flex-row">
+                        <div>Sangat Ringan</div>
+                          <Slider defaultValue={[0]} max={100} step={20} />
+                        <div>Sangat Parah</div>
+                      </div>
+                    </FormItem>
+                  )} 
                 />
 
                 <Button className="bg-[#0063F4] text-white rounded-full" type="submit">Kirim</Button>
