@@ -1,3 +1,6 @@
+# Balap-inV2Web
+Repository development of BALAP-IN Website version of role Pemerintah. Powered by PBLIF20-PBLIF24 Polytechnic Batam State. Farhan Ramadhan - 3312301105 Yulia Pipka Ziliwu - 3312301035 M Iskandar Dinata - 3312301086 Michael Lee - 3312301112
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
