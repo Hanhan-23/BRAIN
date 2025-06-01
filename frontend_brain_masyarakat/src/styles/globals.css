@@ -120,6 +120,7 @@
     @apply bg-background text-foreground;
   }
 }
+<<<<<<< HEAD
 
 /* chart */
 @layer base {
@@ -140,3 +141,5 @@
   }
 }
 /* chart */
+=======
+>>>>>>> brains

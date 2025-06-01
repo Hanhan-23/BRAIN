@@ -1,4 +1,5 @@
 import Footer from "@/components/footer";
+<<<<<<< HEAD
 import Navbar from "@/components/navbar";
 import HeroSection from "@/components/landing_page/hero_section";
 import Tentang from "@/components/landing_page/tentang_section";
@@ -34,6 +35,14 @@ export default function Home() {
       <div className="w-full px-9 py-6 bg-white">
         <Footer></Footer>
       </div>
+=======
+import FormLapor from "@/components/lapor/formlapor";
+
+export default function Home() {
+  return (
+    <div className="w-full px-3 py-6 bg-white">
+      <FormLapor/>
+>>>>>>> brains
     </div>
   );
 }
