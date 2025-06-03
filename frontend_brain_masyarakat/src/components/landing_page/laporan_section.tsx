@@ -4,10 +4,10 @@ import { Button } from "../ui/button"
 
 const ListLaporanSection = () => {
     return (
-        <div className="w-full text-black py-16" id="laporan-section">
-            <p className="text-5xl font-semibold mb-6">Daftar Laporan Terkini</p>
+        <>
+            <p className="text-3xl font-semibold mb-2 md:block md:text-3xl lg:text-5xl">Daftar Laporan Terkini</p>
             <div className="flex flex-col gap-4">
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4">
                     <CardLaporan />
                     <CardLaporan />
                     <CardLaporan />
@@ -17,13 +17,16 @@ const ListLaporanSection = () => {
                     <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-full">Lihat semua</Button>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
 const CategoryBadge = () => {
     return (
-        <div className="bg-blue-200 text-blue-600 py-1 px-2 text-xs rounded-full inline-block">
+        <div className="
+            bg-blue-200 text-blue-600 py-0.5 px-1.5 text-[8px] text-nowrap rounded-full inline-block
+            md:text-[10px] lg:py-1 lg:text-xs
+        ">
             Jalan Rusak
         </div>
     )
@@ -33,17 +36,17 @@ const CardLaporan = () => {
     return (
         <Card className="col-span-1 p-3 rounded-2xl">
             <Image
-                className="w-full rounded-xl mb-2"
+                className="w-full rounded-xl md:mb-1.5 lg:mb-2"
                 src="/image/gambar_01.png"
                 width={100}
                 height={100}
                 alt="ilustrasi aplikasi"
             />
-            <div className="flex gap-1">
+            <div className="flex gap-1 mb-1">
                 <CategoryBadge />
             </div>
-            <CardTitle className="truncate mb-2">Jalan simpang kepri mengalami kerusakan jalan</CardTitle>
-            <CardDescription className="text-sm lineclamp-2 mb-2">Lorem ipsum dolor sit amet consectetur. Eu blandit leo etiam aliquam posuere</CardDescription>
+            <CardTitle className="text-base truncate lg:mb-2">Jalan simpang kepri mengalami kerusakan jalan</CardTitle>
+            <CardDescription className="text-[10px] line-clamp-2 mb-2 md:text-xs lg:text-sm">Lorem ipsum dolor sit amet consectetur. Eu blandit leo etiam aliquam posuere</CardDescription>
         </Card>
     )
 }

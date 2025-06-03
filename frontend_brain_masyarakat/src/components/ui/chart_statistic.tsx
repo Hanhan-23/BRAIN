@@ -9,22 +9,25 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./card"
+} from "@/components/ui/card"
 import {
   ChartConfig,
   ChartContainer,
-  ChartLegend,
+  ChartLegend,  
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-} from "./chart"
+} from "@/components/ui/chart"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./select"
+} from "@/components/ui/select"
+
+export const description = "An interactive area chart"
+
 const chartData = [
   { date: "2024-04-01", desktop: 222, mobile: 150 },
   { date: "2024-04-02", desktop: 97, mobile: 180 },
@@ -124,16 +127,16 @@ const chartConfig = {
     label: "Visitors",
   },
   desktop: {
-    label: "Laporan masuk",
-    color: "hsl(var(--chart-1))",
+    label: "Laporan Masuk",
+    color: "var(--chart-blue-2)",
   },
   mobile: {
-    label: "Laporan selesai",
-    color: "hsl(var(--chart-2))",
+    label: "Laporan Divalidasi",
+    color: "var(--chart-blue-1)",
   },
 } satisfies ChartConfig
 
-export function AreaChartComponent() {
+export function ChartAreaInteractive() {
   const [timeRange, setTimeRange] = React.useState("90d")
 
   const filteredData = chartData.filter((item) => {
@@ -151,17 +154,17 @@ export function AreaChartComponent() {
   })
 
   return (
-    <Card className="rounded-4xl">
+    <Card className="pt-0">
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
-        <div className="grid flex-1 gap-1 text-center sm:text-left">
-          <CardTitle className="text-5xl font-semibold">Statistik</CardTitle>
-          <CardDescription className="text-black">
-            Memberikan gambaran komprehensif terkait intensitas dan persebaran laporan kerusakan jalan dari masyarakat.
+        <div className="grid flex-1 gap-1 max-w-sm">
+          <CardTitle className="text-3xl font-semibold mb-2 md:text-4xl lg:text-5xl">Statistik</CardTitle>
+          <CardDescription className="text-black text-[10px] md:text-xs lg:text-sm">
+            Memberikan gambaran komprehensif terkait intensitas dan persebaran laporan kerusakan jalan dari masyarakat. 
           </CardDescription>
         </div>
         <Select value={timeRange} onValueChange={setTimeRange}>
           <SelectTrigger
-            className="w-[160px] rounded-lg sm:ml-auto"
+            className="hidden w-[160px] rounded-lg sm:ml-auto sm:flex"
             aria-label="Select a value"
           >
             <SelectValue placeholder="Last 3 months" />
