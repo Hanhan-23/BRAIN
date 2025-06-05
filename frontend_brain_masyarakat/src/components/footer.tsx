@@ -1,9 +1,5 @@
 import Link from "next/link"
 
-interface iconProps {
-    icon: any
-}
-
 const Footer = () => {
     return (
         <footer className="w-full px-9 py-6 bg-white">
@@ -65,7 +61,7 @@ const Footer = () => {
     )
 }
 
-const IconFoot = ({icon}: iconProps) => {
+const IconFoot = ({icon}: any) => {
     return (
         <div className="bg-[#DBEAFE] w-8 h-8 rounded-full place-items-center place-content-center p-1">
             {icon}
