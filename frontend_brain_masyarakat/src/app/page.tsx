@@ -7,7 +7,6 @@ import Map from "@/components/landing_page/map_section";
 import StatisticSections from "@/components/landing_page/statistic_section";
 import ListLaporanSection from "@/components/landing_page/laporan_section";
 import ListRekomendasiSection from "@/components/landing_page/rekomendasi_section";
-import FormLapor from "@/components/lapor/formlapor";
 
 export default function Home() {
   return (
@@ -56,6 +55,3 @@ export default function Home() {
 
   );
 }
-
-// Note: You had a duplicate Home component definition below which I've removed
-// If you need a separate page for FormLapor, it should be in a different file
