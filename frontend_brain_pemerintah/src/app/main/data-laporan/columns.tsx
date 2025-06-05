@@ -187,7 +187,7 @@ export const columns: ColumnDef<Recommended>[] = [
   },
   {
     accessorKey: "lokasi",
-    header: ({ column, table }) => {
+    header: ({ table }) => {
       const filterValue = table.getState().columnFilters.find(f => f.id === 'lokasi')?.value as string;
       
       return (

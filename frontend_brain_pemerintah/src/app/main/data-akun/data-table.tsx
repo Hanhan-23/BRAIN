@@ -23,22 +23,23 @@ import { DataTablePagination } from "@/components/TablePagination";
 import { useState } from "react";
 import { MobileAccountCard } from "./mobile-account-card";
 
+export type Account = {
+  id: number;
+  username: string;
+  email: string;
+  no_telp: string;
+  alamat: string;
+  jabatan: string;
+};
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  roleFilter?: string;
-  onRoleFilterChange?: (role: string) => void;
-  filteredCount?: number;
-  totalCount?: number;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  roleFilter,
-  onRoleFilterChange,
-  filteredCount,
-  totalCount,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState({});

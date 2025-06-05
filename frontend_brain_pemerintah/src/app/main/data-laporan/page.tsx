@@ -1,4 +1,4 @@
-import { Recommended, getColumns } from "./columns";
+import { Recommended } from "./columns";
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
 

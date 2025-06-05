@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label";
 // import Link from "next/link";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
 // import { Progress } from "@/components/ui/progress"
 
 export function LoginForm({

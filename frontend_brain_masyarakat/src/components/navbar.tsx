@@ -32,7 +32,9 @@ const Navbar = () => {
                     <Link className="text-sm font-medium px-2 py-1 hover:bg-gray-100 hover:rounded" href={"#rekomendasi-section"}>Rekomendasi</Link>
                 </div>
                 <div>
+                    <Link href="/login">
                     <Button className="rounded-full me-2" variant={"outline"}>Login</Button>
+                    </Link>
                     <Button className="bg-blue-500 hover:bg-blue-600 rounded-full">Daftar</Button>
                 </div>
             </div>

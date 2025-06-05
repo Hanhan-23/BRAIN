@@ -1,6 +1,5 @@
 "use client";
 
-import { Rekomendasi } from "./columns";
 import { createContext, useContext, useState } from "react";
 
 interface DataTableContextType {
