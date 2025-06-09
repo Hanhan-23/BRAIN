@@ -20,7 +20,7 @@ const Navbar = () => {
             <div className="hidden lg:flex lg:gap-x-4">
                 <div className="flex gap-x-4 text-sm items-center">    
                     <Link className="font-medium px-2 py-1 hover:bg-gray-100 hover:rounded" href={"#beranda"}>Beranda</Link>
-                    <Link className="font-medium px-2 py-1 hover:bg-gray-100 hover:rounded" href={"#tentang-section"}>Tentang</Link>
+                    <Link className="font-medium px-2 py-1 hover:bg-gray-100 hover:rounded" href={"#about-section"}>Tentang</Link>
                     <Link className="font-medium px-2 py-1 hover:bg-gray-100 hover:rounded" href={"#cara-melapor-section"}>Cara Melapor</Link>
                     <Link className="font-medium px-2 py-1 hover:bg-gray-100 hover:rounded" href={"#peta-persebaran-section"}>Peta Persebaran</Link>
                     <Link className="font-medium px-2 py-1 hover:bg-gray-100 hover:rounded" href={"#statistik-section"}>Statistik</Link>
@@ -28,7 +28,7 @@ const Navbar = () => {
                     <Link className="font-medium px-2 py-1 hover:bg-gray-100 hover:rounded" href={"#rekomendasi-section"}>Rekomendasi</Link>
                 </div>
                 <div>
-                    <Button className="bg-blue-500 hover:bg-blue-600 rounded-full">Daftar</Button>
+                    <Button className="bg-blue-500 hover:bg-blue-600 rounded-full">Login</Button>
                 </div>
             </div>
             <div className="block lg:hidden">
