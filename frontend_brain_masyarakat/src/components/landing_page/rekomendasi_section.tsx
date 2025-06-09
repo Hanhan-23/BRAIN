@@ -45,7 +45,7 @@ const LevelBadge = () => {
 
 const CardLaporan = () => {
     return (
-        <Card className="col-span-1 p-2 md:p-3 rounded-2xl">
+        <Card className="col-span-1 p-2 md:p-3 rounded-3xl">
             <Image
                 className="w-full rounded-xl mb-2"
                 src="/image/gambar_01.png"
@@ -53,7 +53,7 @@ const CardLaporan = () => {
                 height={100}
                 alt="ilustrasi aplikasi"
             />
-            <div className="flex flex-wrap gap-1 mb-1">
+            <div className="flex flex-wrapt gap-1 mb-1">
                 <CategoryBadge />
                 <LevelBadge />
             </div>

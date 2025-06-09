@@ -34,7 +34,7 @@ const CategoryBadge = () => {
 
 const CardLaporan = () => {
     return (
-        <Card className="col-span-1 p-3 rounded-2xl">
+        <Card className="col-span-1 p-3 rounded-3xl">
             <Image
                 className="w-full rounded-xl md:mb-1.5 lg:mb-2"
                 src="/image/gambar_01.png"
