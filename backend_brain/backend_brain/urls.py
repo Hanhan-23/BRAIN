@@ -16,9 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from backend_brain.apps import views
+from backend_brain.apps import views as viewsapps
+from backend_brain.laporanhandlers import views as viewslaporan
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/', views.hello),
-]
+    path('timenow/', viewsapps.timenow),
+    path('laporan/cards/', viewslaporan.cardLaporan),
+    path('laporan/detail/<int:id_laporan>/', viewslaporan.detailLaporan),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
