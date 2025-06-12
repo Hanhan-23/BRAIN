@@ -6,7 +6,7 @@ import CaraMelapor from "@/components/landing_page/howtoreports_section";
 import Map from "@/components/landing_page/map_section";
 import StatisticSections from "@/components/landing_page/statistic_section";
 import ListLaporan from "@/components/landing_page/laporan_section";
-import ListRekomendasiSection from "@/components/landing_page/rekomendasi_section";
+import ListRekomendasi from "@/components/landing_page/rekomendasi_section";
 
 export default function Home() {
     return (
@@ -40,10 +40,14 @@ export default function Home() {
                 <StatisticSections />
             </section>
             <section className="w-full text-black py-16" id="laporan-section">
-                <ListLaporan />
+                <ListLaporan className={
+                    "grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4"
+                    } />
             </section>
             <section className="w-full h-screen text-black py-16 mb-24" id="rekomendasi-section">
-                <ListRekomendasiSection />
+                <ListRekomendasi className={
+                    "grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4"
+                }/>
             </section>
             </div>
         </div>

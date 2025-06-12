@@ -50,9 +50,9 @@ export default function LaporForm() {
   }
 
   return (
-    <div className="bg-white border border-[#CAD5E2] p-6 rounded-3xl">
+    <div className="flex flex-col bg-white border border-[#CAD5E2] p-6 gap-y-6 rounded-3xl">
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2.5">
                 <FormField
                 control={form.control}
                 name="judul"
