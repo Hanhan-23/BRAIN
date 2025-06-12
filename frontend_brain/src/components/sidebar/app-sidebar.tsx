@@ -24,7 +24,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/componentsmasyarakat/ui/sidebar"
+} from "@/components/ui/sidebar"
 
 import { Button } from "../ui/button";
 
@@ -101,17 +101,17 @@ const data = {
   ],
   dataLaporanUser: [
     {
-      judul: "Data Library",
+      judul: "Jalan rusak di dekat jalur masuk SP Plaza",
       url: "#",
       tanggal: "2025-02-12",
     },
     {
-      judul: "Reports",
+      judul: "Jalan retak di jalur lambat simpang Kepri",
       url: "#",
       tanggal: "2025-02-12",
     },
     {
-      judul: "Word Assistant",
+      judul: "Jalan rusak di depan Wyndham Panbil",
       url: "#",
       tanggal: "2025-02-12",
     },

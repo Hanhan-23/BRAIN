@@ -1,9 +1,9 @@
-import { AppSidebar } from "@/componentsmasyarakat/sidebar/app-sidebar"
-import { SiteHeader } from "@/componentsmasyarakat/sidebar/site-header"
+import { AppSidebar } from "@/components/sidebar/app-sidebar"
+import { SiteHeader } from "@/components/sidebar/site-header"
 import {
     SidebarInset,
     SidebarProvider,
-} from "@/componentsmasyarakat/ui/sidebar"
+} from "@/components/ui/sidebar"
 
 export default function Page({
     children,

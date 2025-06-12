@@ -1,11 +1,11 @@
-import { Button } from "@/componentsmasyarakat/ui/button"
+import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from "@/componentsmasyarakat/ui/dropdown"
+} from "@/components/ui/dropdown"
 
 interface iconProps {
     icon: any

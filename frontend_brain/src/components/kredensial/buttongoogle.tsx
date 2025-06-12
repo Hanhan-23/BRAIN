@@ -1,4 +1,4 @@
-import { Button } from "@/componentsmasyarakat/ui/button"
+import { Button } from "@/components/ui/button"
 
 const ButtonGoogle = () => {
     return(

@@ -1,8 +1,8 @@
 "use client"
 
 import { Button } from "../ui/button"
-import { Separator } from "@/componentsmasyarakat/ui/separator"
-import { SidebarTrigger } from "@/componentsmasyarakat/ui/sidebar"
+import { Separator } from "@/components/ui/separator"
+import { SidebarTrigger } from "@/components/ui/sidebar"
 
 import {
   DropdownMenu,
@@ -11,7 +11,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/componentsmasyarakat/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu"
 
 import { 
   UserIcon,

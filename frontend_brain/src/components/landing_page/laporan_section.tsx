@@ -2,19 +2,23 @@ import { Card, CardTitle, CardDescription } from "../ui/card"
 import Image from "next/image"
 import { Button } from "../ui/button"
 
-const ListLaporanSection = () => {
+interface ListLayout {
+    className: any;
+}
+
+const ListLaporan: React.FC<ListLayout> =  ({className}) => {
     return (
         <>
             <p className="text-3xl font-semibold mb-2 md:block md:text-3xl lg:text-5xl">Daftar Laporan Terkini</p>
             <div className="flex flex-col gap-4">
-                <div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4">
+                <div className={className}>
                     <CardLaporan />
                     <CardLaporan />
                     <CardLaporan />
                     <CardLaporan />
                 </div>
                 <div className="flex justify-end">
-                    <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-full">Lihat semua</Button>
+                    <Button showButton={false} className="bg-blue-600 hover:bg-blue-700 text-white rounded-full">Lihat semua</Button>
                 </div>
             </div>
         </>
@@ -34,9 +38,9 @@ const CategoryBadge = () => {
 
 const CardLaporan = () => {
     return (
-        <Card className="col-span-1 p-3 rounded-3xl">
+        <Card className="col-span-1 p-3 rounded-3xl gap-y-1">
             <Image
-                className="w-full rounded-xl md:mb-1.5 lg:mb-2"
+                className="w-full rounded-xl md:mb-1.5"
                 src="/image/gambar_01.png"
                 width={100}
                 height={100}
@@ -45,10 +49,10 @@ const CardLaporan = () => {
             <div className="flex gap-1 mb-1">
                 <CategoryBadge />
             </div>
-            <CardTitle className="text-base truncate lg:mb-2">Jalan simpang kepri mengalami kerusakan jalan</CardTitle>
+            <CardTitle className="text-base truncate">Jalan simpang kepri mengalami kerusakan jalan</CardTitle>
             <CardDescription className="text-[10px] line-clamp-2 mb-2 md:text-xs lg:text-sm">Lorem ipsum dolor sit amet consectetur. Eu blandit leo etiam aliquam posuere</CardDescription>
         </Card>
     )
 }
 
-export default ListLaporanSection;
+export default ListLaporan;

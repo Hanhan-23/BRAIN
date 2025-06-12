@@ -3,7 +3,6 @@
 import {
   IconDots,
   IconFolder,
-  IconShare3,
   IconTrash,
   type Icon,
 } from "@tabler/icons-react"
@@ -14,7 +13,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/componentsmasyarakat/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu"
 
 import {
   SidebarGroup,
@@ -24,7 +23,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/componentsmasyarakat/ui/sidebar"
+} from "@/components/ui/sidebar"
 
 export function NavDaftarLaporan({
   items,
@@ -45,7 +44,7 @@ export function NavDaftarLaporan({
           <SidebarMenuItem key={item.judul} className="flex items-center">
             <SidebarMenuButton asChild size={'none'}>
               <a href={item.url} className="flex-col items-start justify-center">
-                <span>{item.judul}</span>
+                <span className="line-clamp-1">{item.judul}</span>
                 <span className="text-xs">
                   {new Date(item.tanggal).toLocaleDateString('id-ID', {
                     day: '2-digit',

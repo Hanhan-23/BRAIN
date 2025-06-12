@@ -10,11 +10,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/componentsmasyarakat/ui/form"
-import { Input } from "@/componentsmasyarakat/ui/input"
-import { Button } from "@/componentsmasyarakat/ui/button"
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 import * as React from "react"
-import { Slider } from "@/componentsmasyarakat/ui/slider"
+import { Slider } from "@/components/ui/slider"
 import {
   Select,
   SelectContent,
@@ -23,7 +23,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/componentsmasyarakat/ui/select"
+} from "@/components/ui/select"
 
 const formSchema = z.object({
   judul: z.string().min(10, { message: "Minimal 10 karakter" }),
