@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'backend_brain.apps',
     'backend_brain.laporanhandlers',
     'backend_brain.petahandlers',
+    'backend_brain.rekomendasihandlers',
+    'backend_brain.analisishandlers',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

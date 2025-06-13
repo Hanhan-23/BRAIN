@@ -18,12 +18,18 @@ from django.contrib import admin
 from django.urls import path
 from backend_brain.apps import views as viewsapps
 from backend_brain.laporanhandlers import views as viewslaporan
+from backend_brain.rekomendasihandlers import views as viewsrekomendasi
+from backend_brain.analisishandlers import views as viewsanalisis
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('timenow/', viewsapps.timenow),
+
+    path('beranda/tabel-rekomendasi', viewsrekomendasi.getRekomendasiBeranda, name='tabelrekomendasiberanda'),
+    path('beranda/analisis', viewsanalisis.analisisBeranda, name='analisisberanda'),
+
     path('laporan/cards/', viewslaporan.cardLaporan, name='cardlaporan'),
     path('laporan/detail/<int:id_laporan>/', viewslaporan.detailLaporan, name='detaillaporan'),
     path('laporan/cards', viewslaporan.cardLaporanRequest, name='cardlaporanrequest'),
