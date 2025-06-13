@@ -24,6 +24,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('timenow/', viewsapps.timenow),
-    path('laporan/cards/', viewslaporan.cardLaporan),
-    path('laporan/detail/<int:id_laporan>/', viewslaporan.detailLaporan),
+    path('laporan/cards/', viewslaporan.cardLaporan, name='cardlaporan'),
+    path('laporan/detail/<int:id_laporan>/', viewslaporan.detailLaporan, name='detaillaporan'),
+    path('laporan/cards', viewslaporan.cardLaporanRequest, name='cardlaporanrequest'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

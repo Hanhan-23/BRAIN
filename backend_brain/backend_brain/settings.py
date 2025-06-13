@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'backend_brain.apps',
     'backend_brain.laporanhandlers',
+    'backend_brain.petahandlers',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
