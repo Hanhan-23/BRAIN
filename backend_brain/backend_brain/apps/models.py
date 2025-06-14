@@ -84,7 +84,7 @@ class Laporan(models.Model):
     nilai_kerusakan = models.FloatField(null=True, blank=True)
     gambar = models.ImageField(
         upload_to=None, height_field=None, width_field=None, max_length=None, null=True, blank=True)
-    cluster = models.IntegerField()
+    cluster = models.IntegerField(null=True, blank=True)
     tgl_lapor = models.DateTimeField(auto_now_add=True)
 
     class Meta:
