@@ -51,4 +51,8 @@ urlpatterns = [
     path('laporan/cards/', viewslaporan.cardLaporan, name='cardlaporan'),
     path('laporan/detail/<int:id_laporan>/', viewslaporan.detailLaporan, name='detaillaporan'),
     path('laporan/cards', viewslaporan.cardLaporanRequest, name='cardlaporanrequest'),
+
+    # Rekomendasi
+    path('rekomendasi/requests', viewsrekomendasi.getRekomendasiRequest, name='cardlaporan'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
