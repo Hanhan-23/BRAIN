@@ -1,7 +1,8 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from ..apps.models import Laporan
+from ..apps.models import Laporan, Peta
 from .serializers import CardLaporanSerializer, DetailLaporanSerializer
+from ..petahandlers.serializers import DetailLaporanPetaSerializers
 from django.db.models import Q
 from rest_framework.permissions import IsAuthenticated
 
@@ -20,9 +21,14 @@ def cardLaporan(request):
 @permission_classes([IsAuthenticated])
 def detailLaporan(request, id_laporan):
     if request.method == 'GET':
+        peta = Peta.objects.get(id_laporan=id_laporan)
         laporan = Laporan.objects.get(id_laporan=id_laporan)
-        serializers = DetailLaporanSerializer(laporan)
-        return Response(serializers.data)
+        serializerslaporan = DetailLaporanSerializer(laporan)
+        serializerspeta = DetailLaporanPetaSerializers(peta)
+        return Response({
+            "laporan": serializerslaporan.data,
+            "peta": serializerspeta.data
+        })
 
 
 @api_view(['GET'])
@@ -60,3 +66,13 @@ def cardLaporanUtama(request):
             'id_laporan', 'gambar', 'jenis', 'judul', 'deskripsi', 'tgl_lapor').order_by('-tgl_lapor')[:4]
         serializers = CardLaporanSerializer(laporan, many=True)
         return Response(serializers.data)
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def cardHistoryLaporan(request):
+    user = request.user
+    if request.method == 'GET':
+        laporan = Laporan.objects.values(
+            'id_laporan', 'judul','tgl_lapor'
+        ).filter(id_masyarakat__user=user).order_by('-tgl_lapor')
+        return Response(laporan)

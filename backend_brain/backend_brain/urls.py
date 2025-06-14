@@ -51,6 +51,7 @@ urlpatterns = [
     path('laporan/cards/', viewslaporan.cardLaporan, name='cardlaporan'),
     path('laporan/detail/<int:id_laporan>/', viewslaporan.detailLaporan, name='detaillaporan'),
     path('laporan/cards', viewslaporan.cardLaporanRequest, name='cardlaporanrequest'),
+    path('laporan/history', viewslaporan.cardHistoryLaporan, name='cardlaporanhistory'),
 
     # Rekomendasi
     path('rekomendasi/requests', viewsrekomendasi.getRekomendasiRequest, name='cardlaporan'),

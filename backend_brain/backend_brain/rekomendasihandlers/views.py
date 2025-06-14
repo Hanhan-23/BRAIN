@@ -65,6 +65,7 @@ def utamaRekomendasi(request):
         return Response(hasil)
     
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getRekomendasiRequest(request):
     if request.method == 'GET':
         filter_by = request.query_params.get('filterby', '')
