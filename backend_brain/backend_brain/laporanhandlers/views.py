@@ -1,11 +1,13 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from ..apps.models import Laporan
 from .serializers import CardLaporanSerializer, DetailLaporanSerializer
 from django.db.models import Q
+from rest_framework.permissions import IsAuthenticated
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def cardLaporan(request):
     if request.method == 'GET':
         laporan = Laporan.objects.values(
@@ -15,6 +17,7 @@ def cardLaporan(request):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def detailLaporan(request, id_laporan):
     if request.method == 'GET':
         laporan = Laporan.objects.get(id_laporan=id_laporan)
@@ -23,6 +26,7 @@ def detailLaporan(request, id_laporan):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def cardLaporanRequest(request):
     if request.method == 'GET':
 
@@ -39,3 +43,11 @@ def cardLaporanRequest(request):
 
         serializer = CardLaporanSerializer(laporan, many=True)
         return Response(serializer.data)
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def BerandaLaporanSaya(request):
+    if request.method == 'GET':
+        daftar_laporan = Laporan.objects.values('judul', 'tgl_lapor', 'id_masyarakat').order_by('-tgl_lapor')
+        
+        return Response(daftar_laporan)

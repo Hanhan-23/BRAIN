@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Pemerintah(models.Model):
     STATUS_PENGGUNA = [
@@ -25,7 +26,7 @@ class Pemerintah(models.Model):
 
 
 class Masyarakat(models.Model):
-
+    
     STATUS_PENGGUNA = [
         ('aktif', 'Aktif'),
         ('tangguh', 'Ditangguhkan'),
@@ -43,6 +44,7 @@ class Masyarakat(models.Model):
         choices=STATUS_PENGGUNA,
         null=True, blank=True
     )
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='masyarakat_profile')
 
     class Meta:
         db_table = 'masyarakat'
