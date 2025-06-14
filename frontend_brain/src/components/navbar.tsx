@@ -28,7 +28,11 @@ const Navbar = () => {
                     <Link className="font-medium px-2 py-1 hover:bg-gray-100 hover:rounded" href={"#rekomendasi-section"}>Rekomendasi</Link>
                 </div>
                 <div>
-                    <Button className="bg-blue-500 hover:bg-blue-600 rounded-full">Login</Button>
+                    <Button className="bg-blue-500 hover:bg-blue-600 rounded-full">
+                        <Link href={"/login"}>
+                            Login
+                        </Link>
+                    </Button>
                 </div>
             </div>
             <div className="block lg:hidden">

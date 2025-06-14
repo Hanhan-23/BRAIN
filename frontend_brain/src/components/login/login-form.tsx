@@ -9,10 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-
-import { WarningCircleIcon } from "@phosphor-icons/react";
 
 export function LoginForm({
   className,
@@ -23,12 +19,18 @@ export function LoginForm({
       <Card className="py-16">
         <CardHeader className="text-center">
           <CardTitle className="text-3xl font-bold">Masuk ke Brain</CardTitle>
+          <CardDescription>
+            Masuk ke BRAIN dengan akun Google Anda.
+          </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="flex flex-col gap-y-4">
           <form>
             <div className="grid gap-6">
               <div className="flex flex-col gap-4">
-                <Button variant="outline" className="w-full rounded-full">
+                <Button
+                  variant="outline"
+                  className="w-full rounded-full border-slate-300"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="256"
@@ -52,42 +54,16 @@ export function LoginForm({
                       d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0C79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"
                     />
                   </svg>
-                  Login with Google
+                  Lanjutkan dengan Google
                 </Button>
-              </div>
-              <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
-                <span className="bg-card text-muted-foreground relative z-10 px-2">
-                  atau
-                </span>
-              </div>
-              <div className="grid gap-2">
-                <p className="text-xs text-center">
-                  Masuk sebagai Staf/Pemerintah
-                </p>
-                <Button
-                  type="submit"
-                  className="w-full rounded-full bg-blue-500 hover:bg-blue-600"
-                >
-                  Masuk
-                </Button>
-
-                <div className="flex text-xs items-start gap-x-1 text-slate-500 p-1 rounded border border-gray-300">
-                    <WarningCircleIcon size={20} />
-                    <p>
-                      Untuk pihak terkait yang terlibat dalam pengelolaan dan
-                      pemantauan layanan
-                    </p>
-
-                </div>
               </div>
             </div>
           </form>
+          <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
+            BRAIN (Batam Road AI Network) adalah sistem pelaporan cerdas berbasis AI untuk kerusakan jalan di Batam.
+          </div>
         </CardContent>
       </Card>
-      <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
-        Dengan menekan lanjut, berarti anda menyetujui <a href="#">Terms of Service</a>{" "}
-        dan <a href="#">Privacy Policy</a> kami.
-      </div>
     </div>
   );
 }
