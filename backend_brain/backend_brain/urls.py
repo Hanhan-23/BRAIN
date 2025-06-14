@@ -38,6 +38,10 @@ urlpatterns = [
     #Endpoint login google
     path('auth/google/', GoogleLoginView.as_view(), name='google-login'),
 
+    # Halaman Utama
+    path('cardsrekomendasi/', viewsrekomendasi.utamaRekomendasi, name='utamarekomendasi'),
+    path('cardslaporan/', viewslaporan.cardLaporanUtama, name='cardlaporanutama'),
+
     # Beranda
     path('beranda/tabel-rekomendasi', viewsrekomendasi.getRekomendasiBeranda, name='tabelrekomendasiberanda'),
     path('beranda/analisis', viewsanalisis.analisisBeranda, name='analisisberanda'),

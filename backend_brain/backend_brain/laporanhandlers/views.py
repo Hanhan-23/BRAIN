@@ -51,3 +51,12 @@ def BerandaLaporanSaya(request):
         daftar_laporan = Laporan.objects.values('judul', 'tgl_lapor', 'id_masyarakat').order_by('-tgl_lapor')
         
         return Response(daftar_laporan)
+    
+
+@api_view(['GET'])
+def cardLaporanUtama(request):
+    if request.method == 'GET':
+        laporan = Laporan.objects.values(
+            'id_laporan', 'gambar', 'jenis', 'judul', 'deskripsi', 'tgl_lapor').order_by('-tgl_lapor')[:4]
+        serializers = CardLaporanSerializer(laporan, many=True)
+        return Response(serializers.data)
