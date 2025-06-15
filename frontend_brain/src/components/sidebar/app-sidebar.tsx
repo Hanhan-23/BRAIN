@@ -25,8 +25,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { CardLaporanHistory } from '../../types/berandatype'
+import { useState, useEffect } from "react";
 
 import { Button } from "../ui/button";
+import { getHistoryLaporan } from "@/services/berandaservice";
 
 const data = {
   user: {
@@ -119,6 +122,22 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const [historyLaporan, setHistoryLaporan] = useState<CardLaporanHistory[]>([]);
+
+  const access_token = localStorage.getItem('access_token');  
+
+    useEffect(() => {
+      if (!access_token) return; 
+
+      getHistoryLaporan({ access_token })
+        .then((data) => {
+          setHistoryLaporan(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching laporan:", error);
+        });
+    }, [access_token]);
+
   return (
     <Sidebar collapsible="offcanvas" {...props} className="border-r border-slate-300">
       <SidebarHeader>
@@ -144,7 +163,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <PlusIcon />
           </Button>
         </div>
-        <NavDaftarLaporan items={data.dataLaporanUser} />
+        <NavDaftarLaporan items={historyLaporan} />
       </SidebarContent>
     </Sidebar>
   )

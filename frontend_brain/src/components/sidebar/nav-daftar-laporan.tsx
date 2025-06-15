@@ -24,15 +24,12 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { CardLaporanHistory } from "@/types/berandatype"
 
 export function NavDaftarLaporan({
   items,
 }: {
-  items: {
-    judul: string
-    tanggal: string
-    url: string
-  }[]
+  items: CardLaporanHistory[]
 }) {
   const { isMobile } = useSidebar()
 
@@ -43,10 +40,10 @@ export function NavDaftarLaporan({
         {items.map((item) => (
           <SidebarMenuItem key={item.judul} className="flex items-center">
             <SidebarMenuButton asChild size={'none'}>
-              <a href={item.url} className="flex-col items-start justify-center">
+              <a href={item.judul} className="flex-col items-start justify-center">
                 <span className="line-clamp-1">{item.judul}</span>
                 <span className="text-xs">
-                  {new Date(item.tanggal).toLocaleDateString('id-ID', {
+                  {new Date(item.tgl_lapor).toLocaleDateString('id-ID', {
                     day: '2-digit',
                     month: 'long',
                     year: 'numeric',
