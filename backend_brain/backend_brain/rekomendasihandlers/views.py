@@ -48,16 +48,14 @@ def utamaRekomendasi(request):
             try:
                 peta = Peta.objects.get(id_laporan=rekom['id_laporan'])
                 laporan = Laporan.objects.get(id_laporan=rekom['id_laporan'])
-                status = StatusRekomendasi.objects.get(
-                    id_rekomendasi=rekom['id_rekomendasi'])
 
                 hasil.append({
                     'id_rekomendasi': rekom['id_rekomendasi'],
                     'tingkat_urgent': rekom['tingkat_urgent'],
                     'status_urgent': rekom['status_urgent'],
+                    'judul_laporan': laporan.judul,
                     'jenis': laporan.jenis,
                     'alamat': peta.alamat,
-                    'status': status.status,
                 })
             except Peta.DoesNotExist:
                 continue
@@ -114,6 +112,7 @@ def getRekomendasiRequest(request):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getDetailRekomendasi(request, id_rekomendasi):
     if request.method == 'GET':
         try:
