@@ -6,6 +6,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
 from allauth.socialaccount.models import SocialAccount
 from backend_brain.apps.models import Masyarakat
+from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
+from rest_framework import status
+from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 
 User = get_user_model()
 
@@ -53,3 +56,21 @@ class GoogleLoginView(APIView):
                 'foto_profil': user.masyarakat_profile.foto_profil
             }
         })
+    
+class GoogleRefreshToken(APIView):
+    def post(self, request):
+        refresh_token = request.data.get('refresh')
+
+        if not refresh_token:
+            return Response({'error': 'Refresh token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            refresh = RefreshToken(refresh_token)
+            new_access_token = str(refresh.access_token)
+
+            return Response({
+                'access': new_access_token
+            }, status=status.HTTP_200_OK)
+
+        except TokenError as e:
+            return Response({'error': 'Invalid refresh token.'}, status=status.HTTP_401_UNAUTHORIZED)

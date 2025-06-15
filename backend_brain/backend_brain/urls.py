@@ -20,7 +20,7 @@ from backend_brain.apps import views as viewsapps
 from backend_brain.laporanhandlers import views as viewslaporan
 from backend_brain.rekomendasihandlers import views as viewsrekomendasi
 from backend_brain.analisishandlers import views as viewsanalisis
-from backend_brain.authhandlers.views import GoogleLoginView
+from backend_brain.authhandlers.views import GoogleLoginView, GoogleRefreshToken
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
@@ -37,6 +37,7 @@ urlpatterns = [
 
     #Endpoint login google
     path('auth/google/', GoogleLoginView.as_view(), name='google-login'),
+    path('token/refresh/', GoogleRefreshToken.as_view(), name='refresh-login'),
 
     # Halaman Utama
     path('cardsrekomendasi/', viewsrekomendasi.utamaRekomendasi, name='utamarekomendasi'),
