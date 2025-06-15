@@ -20,33 +20,43 @@ export function LoginForm({
     const router = useRouter()
 
     const login = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      console.log('Google Login Success:', tokenResponse);
+        scope: 'openid email profile',
+        flow: 'implicit', 
+        onSuccess: async (tokenResponse) => {
+            console.log('Login success: ', tokenResponse.access_token);
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/google/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/google/`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                access_token: tokenResponse.access_token,
+              }),
+            })
+
+            if (response.ok) {
+                const data = await response.json();
+                // console.log('JWT dari Django:', data);
+
+                localStorage.setItem('access_token', data.access);
+                localStorage.setItem('refresh_token', data.refresh);
+
+                router.push('/dashboard');
+            } else {
+                console.error('Gagal autentikasi ke Django');
+            }
         },
-        body: JSON.stringify({
-          access_token: tokenResponse.access_token,
-        }),
-      });
+        onError: () => {
+            console.log('Login Failed');
+        },
+    });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log('JWT dari Django:', data);
-
-        localStorage.setItem('access_token', data.access);
-        localStorage.setItem('refresh_token', data.refresh);
-
-        router.push('/dashboard');
-      } else {
-        console.error('Gagal autentikasi ke Django');
-      }
-    },
-    onError: () => console.error('Login Google Gagal'),
-  });
+    const handleGoogleLogin = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        login();
+    };
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -64,7 +74,7 @@ export function LoginForm({
                 <Button
                   variant="outline"
                   className="w-full rounded-full border-slate-300"
-                  onClick={() => login()}
+                  onClick={handleGoogleLogin}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

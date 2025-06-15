@@ -8,7 +8,7 @@ const api = axios.create({
 // Interceptor Request: Tambahkan Authorization Header kalau token ada
 api.interceptors.request.use((config) => {
   if (typeof window !== 'undefined') {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('access_token');
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -28,7 +28,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const refreshToken = localStorage.getItem('refresh');
+        const refreshToken = localStorage.getItem('refresh_token');
 
         if (refreshToken) {
           // Meminta token baru
@@ -37,7 +37,7 @@ api.interceptors.response.use(
           });
 
           const newAccessToken = res.data.access;
-          localStorage.setItem('token', newAccessToken);
+          localStorage.setItem('access_token', newAccessToken);
 
           // Ulangi request dengan token baru
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
@@ -48,8 +48,8 @@ api.interceptors.response.use(
         console.error('Refresh token gagal:', refreshError);
         // Redirect ke login kalau refresh token juga gagal
         if (typeof window !== 'undefined') {
-          localStorage.removeItem('token');
-          localStorage.removeItem('refresh');
+          localStorage.removeItem('access_token');
+          localStorage.removeItem('refresh_token');
           window.location.href = '/login';
         }
         return Promise.reject(refreshError);

@@ -1,10 +1,14 @@
-'use client'
+'use client';
 
-import { GoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google';
 import { useEffect } from 'react';
 import { getCardRekomendasiUtama } from '@/services/utamaservice';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 export default function TestLaporanPage() {
+    const router = useRouter();
+
     useEffect(() => {
         async function fetchData() {
             try {
@@ -18,24 +22,26 @@ export default function TestLaporanPage() {
         fetchData();
     }, []);
 
-    const handleLoginSuccess = (credentialResponse: any) => {
-        console.log('Login success: ', credentialResponse);
-        // Di sini kamu kirimkan access_token Google ke Django
-    };
-
-    const handleLoginError = () => {
-        console.log('Login Failed');
-    };
+    const login = useGoogleLogin({
+        scope: 'openid email profile',
+        flow: 'implicit', 
+        onSuccess: (tokenResponse) => {
+            console.log('Login success: ', tokenResponse.access_token);
+            router.push('/dashboard');
+        },
+        onError: () => {
+            console.log('Login Failed');
+        },
+    });
 
     return (
         <div>
             <h1>Testing Ambil Data</h1>
             <p>Lihat console browser untuk hasilnya.</p>
 
-            <GoogleLogin
-                onSuccess={handleLoginSuccess}
-                onError={handleLoginError}
-            />
+            <Button onClick={() => login()}>
+                Tes Login
+            </Button>
         </div>
     );
 }
