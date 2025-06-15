@@ -5,6 +5,8 @@ from .serializers import CardLaporanSerializer, DetailLaporanSerializer
 from ..petahandlers.serializers import DetailLaporanPetaSerializers
 from django.db.models import Q
 from rest_framework.permissions import IsAuthenticated
+from django.db.models import Count
+from django.db.models.functions import TruncDate
 
 
 @api_view(['GET'])
@@ -76,3 +78,24 @@ def cardHistoryLaporan(request):
             'id_laporan', 'judul','tgl_lapor'
         ).filter(id_masyarakat__user=user).order_by('-tgl_lapor')
         return Response(laporan)
+    
+@api_view(['GET'])
+def statistikLaporanUtama(request):
+    if request.method == 'GET':
+        laporan_per_hari = (
+            Laporan.objects
+            .annotate(date=TruncDate('tgl_lapor'))
+            .values('date')
+            .annotate(desktop=Count('id_laporan'))  
+            .order_by('date') 
+        )
+
+        hasil = [
+            {
+                'date': str(item['date']), 
+                'laporanmasuk': item['desktop'],  
+            }
+            for item in laporan_per_hari
+        ]
+
+        return Response(hasil)

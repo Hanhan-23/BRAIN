@@ -18,9 +18,6 @@ const ListLaporan: React.FC<ListLayout> =  ({className, item}) => {
                         <CardLaporan key={laporan.id_laporan} laporan={laporan} />
                     ))}
                 </div>
-                <div className="flex justify-end">
-                    <Button showButton={false} className="bg-blue-600 hover:bg-blue-700 text-white rounded-full">Lihat semua</Button>
-                </div>
             </div>
         </>
     )

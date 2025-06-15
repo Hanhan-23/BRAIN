@@ -41,6 +41,7 @@ urlpatterns = [
     # Halaman Utama
     path('cardsrekomendasi/', viewsrekomendasi.utamaRekomendasi, name='utamarekomendasi'),
     path('cardslaporan/', viewslaporan.cardLaporanUtama, name='cardlaporanutama'),
+    path('statistiklaporan/', viewslaporan.statistikLaporanUtama, name='statistikUtama'),
 
     # Beranda
     path('beranda/tabel-rekomendasi', viewsrekomendasi.getRekomendasiBeranda, name='tabelrekomendasiberanda'),

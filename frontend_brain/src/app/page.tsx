@@ -5,13 +5,14 @@ import Navbar from "@/components/navbar";
 import HeroSection from "@/components/landing_page/hero_section";
 import About from "@/components/landing_page/about_section";
 import CaraMelapor from "@/components/landing_page/howtoreports_section";
-import Map from "@/components/landing_page/map_section";
 import StatisticSections from "@/components/landing_page/statistic_section";
 import ListLaporan from "@/components/landing_page/laporan_section";
 import ListRekomendasi from "@/components/landing_page/rekomendasi_section";
 import { useState, useEffect } from "react";
 import { CardLaporanItemUtama, CardRekomendasiItemUtama } from "@/types/utamatype";
 import { getCardLaporanUtama, getCardRekomendasiUtama } from "@/services/utamaservice";
+import MapComponent from "@/components/landing_page/map_section";
+import { Button } from "@/components/ui/button"
 
 export default function Home() {
     const [laporan, setLaporan] = useState<CardLaporanItemUtama[]>([]);
@@ -61,7 +62,7 @@ export default function Home() {
                 <CaraMelapor />
             </section>
             <section className="w-full text-black py-16" id="peta-persebaran-section">
-                <Map />
+                <MapComponent />
             </section>
             <section className="w-full py-16" id="statistik-section">
                 <StatisticSections />
@@ -70,11 +71,17 @@ export default function Home() {
                 <ListLaporan item={laporan} className={
                     "grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4"
                     } />
+                <div className="flex justify-end">
+                    <Button showButton={true} className="bg-blue-600 hover:bg-blue-700 text-white rounded-full">Lihat semua</Button>
+                </div>
             </section>
             <section className="w-full h-screen text-black py-16 mb-24" id="rekomendasi-section">
                 <ListRekomendasi item={rekomendasi} className={
                     "grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4"
                 }/>
+                <div className="flex justify-end">
+                    <Button showButton={true} className="bg-blue-600 hover:bg-blue-700 text-white rounded-full">Lihat semua</Button>
+                </div>
             </section>
             </div>
         </div>

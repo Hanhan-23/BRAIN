@@ -1,17 +1,45 @@
-const Map = () => {
+"use client";
+
+import { useState } from "react";
+import { APIProvider, Map } from "@vis.gl/react-google-maps";
+import { 
+  ArrowsOutIcon,
+  ArrowsInIcon,
+} from "@phosphor-icons/react";
+
+import { Button } from "../ui/button"
+
+const MapComponent = () => {
+    const batamCenter = { 
+        lat: 1.0452, 
+        lng: 104.0305 
+    };
+
+    const MapsKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+
     return (
         <div>
             <h1 className="text-3xl font-semibold mb-2 md:text-3xl lg:text-5xl">
                 <a aria-label="Link to Section">Peta Persebaran</a>
             </h1>
             <p className="text-[10px] max-w-md md:text-xs lg:text-sm mb-6">Visualisasi geografis atas laporan kerusakan jalan yang dihimpun melalui partisipasi publik.</p>
-            <div className="flex bg-blue-800 rounded-4xl w-full h-72 md:h-[512px] p-4 justify-end items-start">
-                <div className="bg-white rounded-full p-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M216,48V96a8,8,0,0,1-16,0V67.31l-42.34,42.35a8,8,0,0,1-11.32-11.32L188.69,56H160a8,8,0,0,1,0-16h48A8,8,0,0,1,216,48ZM98.34,146.34,56,188.69V160a8,8,0,0,0-16,0v48a8,8,0,0,0,8,8H96a8,8,0,0,0,0-16H67.31l42.35-42.34a8,8,0,0,0-11.32-11.32ZM208,152a8,8,0,0,0-8,8v28.69l-42.34-42.35a8,8,0,0,0-11.32,11.32L188.69,200H160a8,8,0,0,0,0,16h48a8,8,0,0,0,8-8V160A8,8,0,0,0,208,152ZM67.31,56H96a8,8,0,0,0,0-16H48a8,8,0,0,0-8,8V96a8,8,0,0,0,16,0V67.31l42.34,42.35a8,8,0,0,0,11.32-11.32Z"></path></svg>
-                </div>
+            <div className="flex relative">
+                <APIProvider apiKey={MapsKey ?? ''}>
+                  <div className="border-none overflow-hidden shadow-xl w-full h-72 md:h-[512px] rounded-4xl">
+                    <Map
+                      style={{ width: "100%", height: "100%" }}
+                      defaultCenter={batamCenter}
+                      mapTypeId="hybrid"
+                      defaultZoom={12}
+                      gestureHandling="greedy"
+                      disableDefaultUI={true}
+                      mapId="YOUR_MAP_ID"
+                    />
+                  </div>
+                </APIProvider>
             </div>
         </div>
     )
 }
 
-export default Map;
+export default MapComponent;

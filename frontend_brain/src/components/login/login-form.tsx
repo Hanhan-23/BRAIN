@@ -9,11 +9,45 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useGoogleLogin } from '@react-oauth/google';
+import { useRouter } from 'next/navigation';
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+
+    const router = useRouter()
+
+    const login = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      console.log('Google Login Success:', tokenResponse);
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/google/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_token: tokenResponse.access_token,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('JWT dari Django:', data);
+
+        localStorage.setItem('access_token', data.access);
+        localStorage.setItem('refresh_token', data.refresh);
+
+        router.push('/dashboard');
+      } else {
+        console.error('Gagal autentikasi ke Django');
+      }
+    },
+    onError: () => console.error('Login Google Gagal'),
+  });
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="py-16">
@@ -30,6 +64,7 @@ export function LoginForm({
                 <Button
                   variant="outline"
                   className="w-full rounded-full border-slate-300"
+                  onClick={() => login()}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

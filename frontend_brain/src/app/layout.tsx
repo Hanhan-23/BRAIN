@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import {Instrument_Sans} from "next/font/google";
+import { Instrument_Sans } from "next/font/google";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import "../styles/globals.css";
-
 
 const instrumentSans = Instrument_Sans({
     variable: "--font-instrument",
@@ -15,16 +15,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
     children,
-    }: Readonly<{
+}: Readonly<{
     children: React.ReactNode;
-    }>) {
+}>) {
     return (
         <html lang="en">
-        <body 
-            className={`${instrumentSans.className} antialiased`}
-        >
-            {children}
-        </body>
+            <body className={`${instrumentSans.className} antialiased`}>
+                <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_AUTH_CLIENT_ID || ''}>
+                    {children}
+                </GoogleOAuthProvider>
+            </body>
         </html>
     );
 }

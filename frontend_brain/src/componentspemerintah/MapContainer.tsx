@@ -59,15 +59,17 @@ const MapContainer = () => {
     lng: 104.0305 
   };
 
+  const MapsKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+
   return (
-    <APIProvider apiKey={"AIzaSyBvTDGb2SjsVdzPWapF_NedhVg-k6e8mo0"}>
+    <APIProvider apiKey={MapsKey ?? ''}>
       <Map
         style={{ width: "100%", height: "100%" }}
         defaultCenter={batamCenter}
-        defaultZoom={12} // Zoom level suitable for city view
+        mapTypeId="hybrid"
+        defaultZoom={12}
         gestureHandling={"greedy"}
         disableDefaultUI={true}
-        mapId={"YOUR_MAP_ID"} // Optional: Add if you have a styled map ID
       />
     </APIProvider>
   );
