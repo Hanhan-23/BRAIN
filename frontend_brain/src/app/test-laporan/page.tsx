@@ -1,13 +1,13 @@
 'use client'
 
 import { useEffect } from 'react';
-import { getCardLaporanUtama } from '@/services/utamaservice';
+import { getCardRekomendasiUtama } from '@/services/utamaservice';
 
 export default function TestLaporanPage() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const data = await getCardLaporanUtama();
+                const data = await getCardRekomendasiUtama();
                 console.log('Data berhasil diambil:', data);
             } catch (error) {
                 console.error('Gagal mengambil data:', error);

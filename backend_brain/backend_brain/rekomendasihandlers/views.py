@@ -53,6 +53,7 @@ def utamaRekomendasi(request):
                     'id_rekomendasi': rekom['id_rekomendasi'],
                     'tingkat_urgent': rekom['tingkat_urgent'],
                     'status_urgent': rekom['status_urgent'],
+                    'gambar_laporan': laporan.gambar.name,
                     'judul_laporan': laporan.judul,
                     'jenis': laporan.jenis,
                     'alamat': peta.alamat,

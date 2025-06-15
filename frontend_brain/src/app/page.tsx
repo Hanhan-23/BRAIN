@@ -1,3 +1,5 @@
+'use client'
+
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import HeroSection from "@/components/landing_page/hero_section";
@@ -7,13 +9,38 @@ import Map from "@/components/landing_page/map_section";
 import StatisticSections from "@/components/landing_page/statistic_section";
 import ListLaporan from "@/components/landing_page/laporan_section";
 import ListRekomendasi from "@/components/landing_page/rekomendasi_section";
+import { useState, useEffect } from "react";
+import { CardLaporanItemUtama, CardRekomendasiItemUtama } from "@/types/utamatype";
+import { getCardLaporanUtama, getCardRekomendasiUtama } from "@/services/utamaservice";
 
 export default function Home() {
+    const [laporan, setLaporan] = useState<CardLaporanItemUtama[]>([]);
+    const [rekomendasi, setRekomendasi] = useState<CardRekomendasiItemUtama[]>([]);
+
+    useEffect(() => {
+        getCardLaporanUtama()
+        .then((data) => {
+            setLaporan(data);
+        })
+        .catch((error) => {
+            console.error("Error fetching laporan:", error);
+        });
+    }, []);
+
+    useEffect(() => {
+        getCardRekomendasiUtama()
+        .then((data) => {
+            setRekomendasi(data);
+        })
+        .catch((error) => {
+            console.error("Error fetching laporan:", error);
+        });
+    }, []);
+
     return (
         <>
         {/* navbar */}
         <Navbar />
-
         <main>
         <div className="w-full mx-auto">
             {/* Hero */}
@@ -40,12 +67,12 @@ export default function Home() {
                 <StatisticSections />
             </section>
             <section className="w-full text-black py-16" id="laporan-section">
-                <ListLaporan className={
+                <ListLaporan item={laporan} className={
                     "grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4"
                     } />
             </section>
             <section className="w-full h-screen text-black py-16 mb-24" id="rekomendasi-section">
-                <ListRekomendasi className={
+                <ListRekomendasi item={rekomendasi} className={
                     "grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4"
                 }/>
             </section>
