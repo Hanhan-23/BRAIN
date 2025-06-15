@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from ..apps.models import Laporan, Peta
+from ..apps.models import Laporan, Peta, StatusRekomendasi
 from .serializers import CardLaporanSerializer, DetailLaporanSerializer
 from ..petahandlers.serializers import DetailLaporanPetaSerializers
 from django.db.models import Q
@@ -86,16 +86,28 @@ def statistikLaporanUtama(request):
             Laporan.objects
             .annotate(date=TruncDate('tgl_lapor'))
             .values('date')
-            .annotate(desktop=Count('id_laporan'))  
-            .order_by('date') 
+            .annotate(laporanmasuk=Count('id_laporan'))
+            .order_by('date')
         )
 
-        hasil = [
-            {
-                'date': str(item['date']), 
-                'laporanmasuk': item['desktop'],  
-            }
-            for item in laporan_per_hari
-        ]
+        valid_per_hari = (
+            StatusRekomendasi.objects
+            .filter(status='valid')
+            .annotate(date=TruncDate('id_rekomendasi__id_laporan__tgl_lapor'))
+            .values('date')
+            .annotate(laporanvalid=Count('id_status_rekomendasi'))
+            .order_by('date')
+        )
+
+        valid_dict = {str(item['date']): item['laporanvalid'] for item in valid_per_hari}
+
+        hasil = []
+        for item in laporan_per_hari:
+            tanggal = str(item['date'])
+            hasil.append({
+                'date': tanggal,
+                'laporanmasuk': item['laporanmasuk'],
+                'laporanvalid': valid_dict.get(tanggal, 0)
+            })
 
         return Response(hasil)

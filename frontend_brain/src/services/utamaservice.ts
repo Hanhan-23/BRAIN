@@ -1,5 +1,5 @@
 import api from '../lib/axios'
-import { CardLaporanItemUtama, CardRekomendasiItemUtama } from '../types/utamatype'
+import { CardLaporanItemUtama, CardRekomendasiItemUtama, StatistikLaporanUtama } from '../types/utamatype'
 
 export async function getCardLaporanUtama(): Promise<CardLaporanItemUtama[]> {
     const res = await api.get<CardLaporanItemUtama[]>('/cardslaporan');
@@ -8,5 +8,10 @@ export async function getCardLaporanUtama(): Promise<CardLaporanItemUtama[]> {
 
 export async function getCardRekomendasiUtama(): Promise<CardRekomendasiItemUtama[]> {
     const res = await api.get<CardRekomendasiItemUtama[]>('/cardsrekomendasi');
+    return res.data
+}
+
+export async function statistikLaporanUtama(): Promise<StatistikLaporanUtama[]> {
+    const res = await api.get<StatistikLaporanUtama[]>('/statistiklaporan');
     return res.data
 }

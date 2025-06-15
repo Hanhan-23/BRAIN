@@ -25,6 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { StatistikLaporanUtama } from "@/types/utamatype"
 
 export const description = "An interactive area chart"
 
@@ -136,10 +137,16 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function ChartAreaInteractive() {
+export function ChartAreaInteractive({itemStatistik} : { itemStatistik: StatistikLaporanUtama[] }) {
+  const mappedData = itemStatistik.map((item) => ({
+    date: item.date,
+    desktop: item.laporanmasuk, 
+    mobile:  item.laporanvalid, 
+  }))
+
   const [timeRange, setTimeRange] = React.useState("7d")
 
-  const filteredData = chartData.filter((item) => {
+  const filteredData = mappedData.filter((item) => {
     const date = new Date(item.date)
     const referenceDate = new Date("2024-06-30")
     let daysToSubtract = 90

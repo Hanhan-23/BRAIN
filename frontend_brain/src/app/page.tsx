@@ -9,14 +9,15 @@ import StatisticSections from "@/components/landing_page/statistic_section";
 import ListLaporan from "@/components/landing_page/laporan_section";
 import ListRekomendasi from "@/components/landing_page/rekomendasi_section";
 import { useState, useEffect } from "react";
-import { CardLaporanItemUtama, CardRekomendasiItemUtama } from "@/types/utamatype";
-import { getCardLaporanUtama, getCardRekomendasiUtama } from "@/services/utamaservice";
+import { CardLaporanItemUtama, CardRekomendasiItemUtama, StatistikLaporanUtama } from "@/types/utamatype";
+import { getCardLaporanUtama, getCardRekomendasiUtama, statistikLaporanUtama } from "@/services/utamaservice";
 import MapComponent from "@/components/landing_page/map_section";
 import { Button } from "@/components/ui/button"
 
 export default function Home() {
     const [laporan, setLaporan] = useState<CardLaporanItemUtama[]>([]);
     const [rekomendasi, setRekomendasi] = useState<CardRekomendasiItemUtama[]>([]);
+    const [statistikLaporan, setStatistikLaporan] = useState<StatistikLaporanUtama[]>([]);
 
     useEffect(() => {
         getCardLaporanUtama()
@@ -37,7 +38,16 @@ export default function Home() {
             console.error("Error fetching laporan:", error);
         });
     }, []);
-
+    useEffect(() => {
+        statistikLaporanUtama()
+        .then((data) => {
+            setStatistikLaporan(data);
+        })
+        .catch((error) => {
+            console.error("Error fetching laporan:", error);
+        });
+    }, []);
+    
     return (
         <>
         {/* navbar */}
@@ -65,7 +75,7 @@ export default function Home() {
                 <MapComponent />
             </section>
             <section className="w-full py-16" id="statistik-section">
-                <StatisticSections />
+                <StatisticSections item={statistikLaporan}/>
             </section>
             <section className="w-full text-black py-16" id="laporan-section">
                 <ListLaporan item={laporan} className={

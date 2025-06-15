@@ -15,3 +15,9 @@ export interface CardRekomendasiItemUtama {
     jenis: string;
     alamat:string;
 }
+
+export interface StatistikLaporanUtama {
+    date: string;
+    laporanmasuk: number;
+    laporanvalid: number;
+}
