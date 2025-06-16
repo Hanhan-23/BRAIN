@@ -1,13 +1,35 @@
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, parser_classes
 from rest_framework.response import Response
 from ..apps.models import Laporan, Peta, StatusRekomendasi
-from .serializers import CardLaporanSerializer, DetailLaporanSerializer
+from .serializers import CardLaporanSerializer, DetailLaporanSerializer, BuatLaporanSerializer
 from ..petahandlers.serializers import DetailLaporanPetaSerializers
 from django.db.models import Q
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Count
 from django.db.models.functions import TruncDate
+from rest_framework.parsers import MultiPartParser, FormParser
 
+
+@api_view(['POST'])
+@parser_classes([MultiPartParser, FormParser])
+def buatLaporan(request):
+    if request.method == 'POST':
+        try:
+            laporan = Laporan.objects.create(
+                judul =  request.data.get('judul'),
+                jenis = request.data.get('jenis'),
+                deskripsi =  request.data.get('deskripsi'),
+                cuaca = request.data.get('cuaca'),
+                nilai_kerusakan = request.data.get('nilai_kerusakan'),
+                gambar = request.data.get('gambar'),
+                cluster =  request.data.get('cluster'),
+            )
+
+            laporan.save()
+            
+            return Response(laporan)
+        except Exception as e:
+            print(f"Error:{e}")
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
