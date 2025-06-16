@@ -22,16 +22,43 @@ import {
   CaretRightIcon,
   CaretLeftIcon,
   } from "@phosphor-icons/react";
+import { StatistikLaporanUtama, CardLaporanItemUtama } from "@/types/utamatype";
+import { useState, useEffect } from "react";
+import { statistikLaporanUtama,getCardLaporanUtama } from "@/services/utamaservice";
 
 import ListLaporan from "@/components/landing_page/laporan_section";
 
 const LaporanPage = () => {
+  const [statistikLaporan, setStatistikLaporan] = useState<StatistikLaporanUtama[]>([]);
+
+    useEffect(() => {
+          statistikLaporanUtama()
+          .then((data) => {
+              setStatistikLaporan(data);
+          })
+          .catch((error) => {
+              console.error("Error fetching laporan:", error);
+          });
+      }, []);
+
+  const [laporan, setLaporan] = useState<CardLaporanItemUtama[]>([]);
+
+      useEffect(() => {
+          getCardLaporanUtama()
+          .then((data) => {
+              setLaporan(data);
+          })
+          .catch((error) => {
+              console.error("Error fetching laporan:", error);
+          });
+      }, []);
+
   return (
     <div className="flex flex-1 flex-col">
       <div className="@container/main flex flex-1 flex-col gap-2">
         <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
           <div className="px-4 lg:px-6">
-            <ChartAreaInteractive />
+            <ChartAreaInteractive itemStatistik={statistikLaporan}/>
           </div>
           <div className="flex px-4 lg:px-6">
             <Input
@@ -61,6 +88,7 @@ const LaporanPage = () => {
           </div>
           <div className="px-4 lg:px-6">
             <ListLaporan
+              item={laporan}
               className={
                 "grid grid-cols-2 gap-2 md:grid-cols-2 md:gap-4 lg:grid-cols-4"
               }
