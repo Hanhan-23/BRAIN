@@ -1,6 +1,4 @@
 from rest_framework import serializers
-from ..apps.models import Laporan
-
 class CardLaporanSerializer(serializers.Serializer):
     id_laporan = serializers.IntegerField()
     gambar = serializers.CharField()
@@ -19,8 +17,3 @@ class DetailLaporanSerializer(serializers.Serializer):
     nilai_kerusakan = serializers.FloatField()
     gambar = serializers.CharField()
     tgl_lapor = serializers.DateTimeField()
-
-class BuatLaporanSerializer(serializers.Serializer):
-    class Meta:
-        model = Laporan
-        fields = '__all__'

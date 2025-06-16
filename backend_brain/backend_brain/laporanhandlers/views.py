@@ -1,35 +1,61 @@
 from rest_framework.decorators import api_view, permission_classes, parser_classes
 from rest_framework.response import Response
 from ..apps.models import Laporan, Peta, StatusRekomendasi
-from .serializers import CardLaporanSerializer, DetailLaporanSerializer, BuatLaporanSerializer
+from .serializers import CardLaporanSerializer, DetailLaporanSerializer
 from ..petahandlers.serializers import DetailLaporanPetaSerializers
 from django.db.models import Q
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Count
 from django.db.models.functions import TruncDate
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework import status
 
 
 @api_view(['POST'])
 @parser_classes([MultiPartParser, FormParser])
 def buatLaporan(request):
-    if request.method == 'POST':
-        try:
-            laporan = Laporan.objects.create(
-                judul =  request.data.get('judul'),
-                jenis = request.data.get('jenis'),
-                deskripsi =  request.data.get('deskripsi'),
-                cuaca = request.data.get('cuaca'),
-                nilai_kerusakan = request.data.get('nilai_kerusakan'),
-                gambar = request.data.get('gambar'),
-                cluster =  request.data.get('cluster'),
+    try:
+        laporan = Laporan.objects.create(
+            judul=request.data.get('judul'),
+            jenis=request.data.get('jenis'),
+            deskripsi=request.data.get('deskripsi'),
+            cuaca=request.data.get('cuaca'),
+            nilai_kerusakan=float(request.data.get('nilai_kerusakan')) if request.data.get('nilai_kerusakan') else None,
+            gambar=request.data.get('gambar'),
+            cluster=request.data.get('cluster'),
+        )
+
+        if laporan.nilai_kerusakan is not None and (laporan.nilai_kerusakan < 0 or laporan.nilai_kerusakan > 100):
+            laporan.delete()
+            return Response({'status': 'failed', 'message': 'Nilai kerusakan harus di antara 0 - 100.'},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        alamat = request.data.get('alamat')
+        jalan = request.data.get('jalan')
+        latitude = request.data.get('latitude')
+        longitude = request.data.get('longitude')
+
+        if alamat or jalan or latitude or longitude:
+            Peta.objects.create(
+                id_laporan=laporan,
+                alamat=alamat,
+                jalan=jalan,
+                latitude=latitude,
+                longitude=longitude
             )
 
-            laporan.save()
-            
-            return Response(laporan)
-        except Exception as e:
-            print(f"Error:{e}")
+        return Response({
+            'status': 'success',
+            'laporan': laporan.id_laporan
+        }, status=status.HTTP_201_CREATED)
+
+    except Exception as e:
+        return Response({
+            'status': 'failed',
+            'message': str(e)
+        }, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -73,7 +99,8 @@ def cardLaporanRequest(request):
 
         serializer = CardLaporanSerializer(laporan, many=True)
         return Response(serializer.data)
-    
+
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def BerandaLaporanSaya(request):
@@ -90,7 +117,8 @@ def cardLaporanUtama(request):
             'id_laporan', 'gambar', 'jenis', 'judul', 'deskripsi', 'tgl_lapor').order_by('-tgl_lapor')[:4]
         serializers = CardLaporanSerializer(laporan, many=True)
         return Response(serializers.data)
-    
+
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def cardHistoryLaporan(request):
@@ -100,7 +128,8 @@ def cardHistoryLaporan(request):
             'id_laporan', 'judul','tgl_lapor'
         ).filter(id_masyarakat__user=user).order_by('-tgl_lapor')
         return Response(laporan)
-    
+
+
 @api_view(['GET'])
 def statistikLaporanUtama(request):
     if request.method == 'GET':
