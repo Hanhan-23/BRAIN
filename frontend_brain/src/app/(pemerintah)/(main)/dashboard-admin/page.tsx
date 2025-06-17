@@ -1,11 +1,17 @@
+'use client'
+
 import { Badge } from "@/componentspemerintah/ui/badge";
 import { TrendingUp, TriangleAlert } from "lucide-react";
 import AppPieChart from "@/componentspemerintah/AppPieChart";
 import CardList from "@/componentspemerintah/CardList";
 import AppAreaChart from "@/componentspemerintah/AppAreaChart";
 import MapContainer from "@/componentspemerintah/MapContainer";
+import { useEffect, useState } from "react";
 
 const Dashboard = () => {
+
+  
+  
   // Data for the pie chart
   const pieChartData = [
     { name: "Total Reports", value: 30, color: "#bfdbfe" },

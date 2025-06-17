@@ -22,7 +22,7 @@ import {
   CaretRightIcon,
   CaretLeftIcon,
   } from "@phosphor-icons/react";
-import { StatistikLaporanUtama, CardLaporanItemUtama } from "@/types/utamatype";
+import { StatistikLaporanUtama, CardLaporanItemUtama } from "@/types/masyarakattypes/utamatype";
 import { useState, useEffect } from "react";
 import { statistikLaporanUtama,getCardLaporanUtama } from "@/services/utamaservice";
 

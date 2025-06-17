@@ -2,6 +2,8 @@ from rest_framework.decorators import api_view
 from ..apps.models import Laporan, Rekomendasi, StatusRekomendasi
 from django.db.models import F, Q, OuterRef, Subquery
 from rest_framework.response import Response
+from django.db.models.functions import TruncDate
+from django.db.models import Count
 
 
 @api_view(['GET'])
@@ -45,5 +47,27 @@ def berandaAnalisis(request):
 
 @api_view(['GET'])
 def statistikLaporanPemerintah(request):
-        if request.method == 'GET':
-            return Response('ok')
+    if request.method == 'GET':
+        laporan_per_hari = (
+            Laporan.objects
+            .annotate(date=TruncDate('tgl_lapor')) 
+            .values('date', 'jenis') 
+            .annotate(total=Count('id_laporan'))  
+            .order_by('date')
+        )
+
+        data_chart = {}
+
+        for laporan in laporan_per_hari:
+            date_str = laporan['date'].strftime('%Y-%m-%d')
+            jenis = laporan['jenis']
+            total = laporan['total']
+
+            if date_str not in data_chart:
+                data_chart[date_str] = {'date': date_str, 'jalan': 0, 'lampu': 0, 'jembatan': 0}
+
+            data_chart[date_str][jenis] = total
+
+        result = list(data_chart.values())
+
+        return Response(result)

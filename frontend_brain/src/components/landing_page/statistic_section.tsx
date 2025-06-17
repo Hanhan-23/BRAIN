@@ -1,5 +1,5 @@
 import { ChartAreaInteractive } from "../ui/chart_statistic";
-import { StatistikLaporanUtama } from "@/types/utamatype";
+import { StatistikLaporanUtama } from "@/types/masyarakattypes/utamatype";
 
 const StatisticSections = ({item} : { item: StatistikLaporanUtama[] }) => {
     return (

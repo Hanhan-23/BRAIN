@@ -1,5 +1,5 @@
-import api from '../lib/axios'
-import { CardLaporanItemUtama, CardRekomendasiItemUtama, StatistikLaporanUtama } from '../types/utamatype'
+import api from '@/lib/axios'
+import { CardLaporanItemUtama, CardRekomendasiItemUtama, StatistikLaporanUtama } from '@/types/masyarakattypes/utamatype'
 
 export async function getCardLaporanUtama(): Promise<CardLaporanItemUtama[]> {
     const res = await api.get<CardLaporanItemUtama[]>('/cardslaporan');

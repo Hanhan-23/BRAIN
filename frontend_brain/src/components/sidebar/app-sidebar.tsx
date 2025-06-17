@@ -25,7 +25,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { CardLaporanHistory } from '../../types/berandatype'
+import { CardLaporanHistory } from '../../types/masyarakattypes/berandatype'
 import { useState, useEffect } from "react";
 
 import { Button } from "../ui/button";

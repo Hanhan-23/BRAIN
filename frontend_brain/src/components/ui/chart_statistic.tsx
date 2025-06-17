@@ -25,7 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { StatistikLaporanUtama } from "@/types/utamatype"
+import { StatistikLaporanUtama } from "@/types/masyarakattypes/utamatype"
 
 export const description = "An interactive area chart"
 

@@ -1,7 +1,7 @@
 import { Card, CardTitle, CardDescription } from "../ui/card"
 import Image from "next/image"
 import { Button } from "../ui/button"
-import { CardLaporanItemUtama } from "@/types/utamatype";
+import { CardLaporanItemUtama } from "@/types/masyarakattypes/utamatype";
 
 interface ListLayout {
     className: any;

@@ -9,8 +9,8 @@ import StatisticSections from "@/components/landing_page/statistic_section";
 import ListLaporan from "@/components/landing_page/laporan_section";
 import ListRekomendasi from "@/components/landing_page/rekomendasi_section";
 import { useState, useEffect } from "react";
-import { CardLaporanItemUtama, CardRekomendasiItemUtama, StatistikLaporanUtama } from "@/types/utamatype";
-import { getCardLaporanUtama, getCardRekomendasiUtama, statistikLaporanUtama } from "@/services/utamaservice";
+import { CardLaporanItemUtama, CardRekomendasiItemUtama, StatistikLaporanUtama } from "@/types/masyarakattypes/utamatype";
+import { getCardLaporanUtama, getCardRekomendasiUtama, statistikLaporanUtama } from "@/services/masyarakatservices/utamaservice";
 import MapComponent from "@/components/landing_page/map_section";
 import { Button } from "@/components/ui/button"
 
