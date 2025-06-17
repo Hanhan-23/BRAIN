@@ -15,7 +15,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="w-full max-w-[100vw] overflow-x-hidden">
+    <div className="w-full overflow-x-hidden">
       {/* Welcome Message Section */}
       <div className="bg-blue-200 dark:bg-zinc-900 text-center text-black dark:text-white p-2 rounded-md shadow-lg shadow-blue-900/20 dark:shadow-blue-500/20">
         <h1 className="text-xl font-bold">Welcome to BRAIN</h1>

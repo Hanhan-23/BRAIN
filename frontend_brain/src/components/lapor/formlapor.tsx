@@ -24,6 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import FileUpload from "./uploadfileinput"
 
 const formSchema = z.object({
   judul: z.string().min(10, { message: "Minimal 10 karakter" }),
@@ -142,7 +143,12 @@ export default function LaporForm() {
                   )} 
                 />
 
-                <Button className="bg-[#0063F4] text-white rounded-full" type="submit">Kirim</Button>
+                <FileUpload />
+
+                <div className="flex justify-end gap-2">
+                  <Button className="rounded-full border-slate-300" variant={"outline"} type="submit">Draf</Button>
+                  <Button className="bg-[#0063F4] hover:bg-[#0063F4] text-white rounded-full" type="submit">Kirim</Button>
+                </div>
             </form>
         </Form>
     </div>
