@@ -1,35 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Pemerintah(models.Model):
+class Pengguna(models.Model):
+    
     STATUS_PENGGUNA = [
         ('aktif', 'Aktif'),
         ('tangguh', 'Ditangguhkan'),
     ]
 
-    id_pemerintah = models.AutoField(primary_key=True)
-    nama_lengkap = models.CharField(max_length=100, null=True, blank=True)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=255)
-    foto_profil = models.URLField(null=True, blank=True)
-    google_id = models.CharField(
-        max_length=50, unique=True, null=True, blank=True)
-    tgl_bergabung = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(
-        max_length=15,
-        choices=STATUS_PENGGUNA,
-        null=True, blank=True
-    )
-
-    class Meta:
-        db_table = 'pemerintah'
-
-
-class Masyarakat(models.Model):
-    
-    STATUS_PENGGUNA = [
-        ('aktif', 'Aktif'),
-        ('tangguh', 'Ditangguhkan'),
+    PERAN_PENGGUNA = [
+        ('masyarakat', 'Masyarakat'),
+        ('pemerintah', 'Pemerintah'),
     ]
 
     id_masyarakat = models.AutoField(primary_key=True)
@@ -42,6 +23,11 @@ class Masyarakat(models.Model):
     status = models.CharField(
         max_length=15,
         choices=STATUS_PENGGUNA,
+        null=True, blank=True
+    )
+    peran = models.CharField(
+        max_length=15,
+        choices=PERAN_PENGGUNA,
         null=True, blank=True
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='masyarakat_profile')
@@ -64,7 +50,7 @@ class Laporan(models.Model):
 
     id_laporan = models.AutoField(primary_key=True)
     id_masyarakat = models.ForeignKey(
-        Masyarakat,
+        Pengguna,
         on_delete=models.CASCADE,
         related_name='masyarakatlaporan',
         null=True, blank=True
@@ -145,7 +131,7 @@ class StatusRekomendasi(models.Model):
     )
     tgl_rekomendasi = models.DateTimeField(auto_now_add=True)
     oleh = models.ForeignKey(
-        Pemerintah, on_delete=models.CASCADE, related_name='pemerintahstatus', null=True, blank=True)
+        Pengguna, on_delete=models.CASCADE, related_name='pemerintahstatus', null=True, blank=True)
 
     class Meta:
         db_table = 'status_laporan'

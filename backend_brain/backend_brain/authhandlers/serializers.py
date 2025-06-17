@@ -2,7 +2,7 @@
 
 from dj_rest_auth.registration.serializers import SocialLoginSerializer
 from allauth.socialaccount.models import SocialAccount
-from backend_brain.apps.models import Masyarakat
+from backend_brain.apps.models import Pengguna
 
 class CustomSocialLoginSerializer(SocialLoginSerializer):
 
@@ -10,19 +10,18 @@ class CustomSocialLoginSerializer(SocialLoginSerializer):
         data = super().validate(attrs)
         user = self.user
 
-        # Tambahkan print debug
         print(f"[DEBUG] Social login validate triggered for {user.username}")
 
-        # Buat Masyarakat jika belum ada
         if not hasattr(user, 'masyarakat_profile'):
             social_account = SocialAccount.objects.filter(user=user, provider='google').first()
             google_id = social_account.uid if social_account else None
 
-            Masyarakat.objects.create(
+            Pengguna.objects.create(
                 user=user,
                 nama_lengkap=user.get_full_name(),
                 email=user.email,
                 google_id=google_id,
+                peran = 'masyarakat',
                 status='aktif'
             )
             print(f"[DEBUG] Masyarakat created for {user.username}")

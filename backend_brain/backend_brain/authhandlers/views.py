@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
 from allauth.socialaccount.models import SocialAccount
-from backend_brain.apps.models import Masyarakat
+from backend_brain.apps.models import Pengguna
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from rest_framework import status
 from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
@@ -32,12 +32,13 @@ class GoogleLoginView(APIView):
         user, created = User.objects.get_or_create(email=email, defaults={'username': email, 'first_name': name})
 
         if not hasattr(user, 'masyarakat_profile'):
-            Masyarakat.objects.create(
+            Pengguna.objects.create(
                 user=user,
                 nama_lengkap=name,
                 email=email,
                 foto_profil=picture,
                 google_id=google_id,
+                peran='masyarakat',
                 status='aktif'
             )
             print(f"[DEBUG] Profil masyarakat dibuat untuk {user.username}")
@@ -50,6 +51,7 @@ class GoogleLoginView(APIView):
             'status': 'success',
             'refresh': str(refresh),
             'access': str(refresh.access_token),
+            'peran': user.masyarakat_profile.peran,
             'user': {
                 'email': user.email,
                 'nama_lengkap': user.masyarakat_profile.nama_lengkap,

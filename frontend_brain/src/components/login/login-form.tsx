@@ -41,8 +41,15 @@ export function LoginForm({
 
                 localStorage.setItem('access_token', data.access);
                 localStorage.setItem('refresh_token', data.refresh);
+                localStorage.setItem('peran', data.peran);
 
-                router.push('/dashboard');
+                if (data.peran === 'pemerintah') {
+                    router.push('/dashboard-admin');
+                } else if (data.peran === 'masyarakat') {
+                    router.push('/dashboard');
+                } else {
+                    router.push('/')
+                }
             } else {
                 console.error('Gagal autentikasi ke Django');
             }
