@@ -1,21 +1,37 @@
 "use client";
 
 import { useState } from "react";
-import { APIProvider, Map } from "@vis.gl/react-google-maps";
+import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 import { 
   ArrowsOutIcon,
   ArrowsInIcon,
 } from "@phosphor-icons/react";
 
 import { Button } from "../ui/button"
+import { CardRekomendasiItemUtama } from "@/types/masyarakattypes/utamatype";
 
-const MapComponent = () => {
-    const batamCenter = { 
-        lat: 1.0452, 
-        lng: 104.0305 
-    };
+    const MapComponent = ({item} : {item: CardRekomendasiItemUtama[]}) => {
+      const batamCenter = { 
+          lat: 1.0452, 
+          lng: 104.0305 
+      };
+
+    const markers = item;
 
     const MapsKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+
+    const getMarkerIcon = (status: string) => {
+    switch (status) {
+      case "tinggi":
+        return "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+      case "sedang":
+        return "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+      case "rendah":
+        return "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+      default:
+        return "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"; 
+    }
+  };
 
     return (
         <div>
@@ -34,7 +50,18 @@ const MapComponent = () => {
                       gestureHandling="greedy"
                       disableDefaultUI={true}
                       mapId="YOUR_MAP_ID"
-                    />
+                    >
+                      {markers.map((marker) => (
+                        <Marker
+                          key={marker['id_rekomendasi']}
+                          position={{ lat: marker['latitude'], lng: marker['longitude'] }}
+                          title={marker['judul_laporan']}
+                            icon={{
+                            url: getMarkerIcon(marker["status_urgent"]),
+                          }}
+                        />
+                      ))}
+                    </Map>
                   </div>
                 </APIProvider>
             </div>

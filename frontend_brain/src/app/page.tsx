@@ -72,7 +72,7 @@ export default function Home() {
                 <CaraMelapor />
             </section>
             <section className="w-full text-black py-16" id="peta-persebaran-section">
-                <MapComponent />
+                <MapComponent item={rekomendasi}/>
             </section>
             <section className="w-full py-16" id="statistik-section">
                 <StatisticSections item={statistikLaporan}/>

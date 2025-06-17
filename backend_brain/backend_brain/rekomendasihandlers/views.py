@@ -57,6 +57,8 @@ def utamaRekomendasi(request):
                     'judul_laporan': laporan.judul,
                     'jenis': laporan.jenis,
                     'alamat': peta.alamat,
+                    'latitude': peta.latitude,
+                    'longitude': peta.longitude,
                 })
             except Peta.DoesNotExist:
                 continue

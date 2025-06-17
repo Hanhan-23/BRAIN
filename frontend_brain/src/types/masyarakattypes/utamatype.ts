@@ -14,6 +14,8 @@ export interface CardRekomendasiItemUtama {
     judul_laporan: string;
     jenis: string;
     alamat:string;
+    latitude:number;
+    longitude:number;
 }
 
 export interface StatistikLaporanUtama {
