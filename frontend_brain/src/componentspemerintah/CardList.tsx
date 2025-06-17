@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Card, CardContent, CardFooter, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
+import { rekomendasiBerandaPemerintah } from "@/types/pemerintahtypes/berandatype";
 
 const latestTransactions = [
   {
@@ -29,33 +30,34 @@ const latestTransactions = [
   },
 ];
 
-const CardList = ({ title = '' }: { title?: string }) => {
+const CardList = ({ title = '', rekomendasiData }: { title?: string, rekomendasiData:rekomendasiBerandaPemerintah[] }) => {
   return (
     <div className="">
       <h1 className="text-lg font-medium mb-6">{title}</h1>
       <div className="flex flex-col gap-2">
-        {latestTransactions.map((item) => (
+        {rekomendasiData.map((item) => (
           <Card 
-            key={item.id} 
+            key={item.id_rekomendasi} 
             className={`flex-row items-center justify-between gap-4 p-4 ${
-              item.priority === "high" ? "border-l-4 border-red-200 bg-red-500 dark:bg-red-800" : 
-              item.priority === "medium" ? "border-l-4 border-yellow-200 bg-yellow-500 dark:bg-yellow-500" :
+              item.status_urgent === "tinggi" ? "border-l-4 border-red-200 bg-red-500 dark:bg-red-800" : 
+              item.status_urgent === "sedang" ? "border-l-4 border-yellow-200 bg-yellow-500 dark:bg-yellow-500" :
+              item.status_urgent === "rendah" ? "border-l-4 border-green-200 bg-green-500 dark:bg-green-500" :
               "border-l-4 border-gray-200"
             }`}
           >
             <div className="w-12 h-12 rounded-sm relative overflow-hidden">
               <Image
-                src={item.image}
-                alt={item.title}
+                src={`http://localhost:8000/media/${item.gambar}`}
+                alt={item.judul}
                 fill
                 className="object-cover"
               />
             </div>
             <CardContent className="flex-1 p-0">
-              <CardTitle className="text-sm font-medium">{item.title}</CardTitle>
-              <Badge variant="secondary">{item.badge}</Badge>
+              <CardTitle className="text-sm font-medium">{item.judul}</CardTitle>
+              <Badge variant="secondary">{item.alamat}</Badge>
             </CardContent>
-            <CardFooter className="p-0">{item.count}</CardFooter>
+            <CardFooter className="p-0">{item.total_laporan_cluster}</CardFooter>
           </Card>
         ))}
       </div>

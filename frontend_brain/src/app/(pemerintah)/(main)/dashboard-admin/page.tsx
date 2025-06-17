@@ -7,17 +7,42 @@ import CardList from "@/componentspemerintah/CardList";
 import AppAreaChart from "@/componentspemerintah/AppAreaChart";
 import MapContainer from "@/componentspemerintah/MapContainer";
 import { useEffect, useState } from "react";
+import { empatAnalisis, rekomendasiBerandaPemerintah } from "@/types/pemerintahtypes/berandatype";
+import { getEmpatAnalisis, RekomendasiBerandaPemerintah } from "@/services/pemerintahservices/berandaservice";
 
 const Dashboard = () => {
 
-  
+  const [empatAnalisis, setEmpatAnalisis] = useState<empatAnalisis>();
+  const [berandarekomendasi, setBerandaRekomendasi] = useState<rekomendasiBerandaPemerintah[]>([]);
+
+  const access_token = localStorage.getItem('access_token')
+
+  useEffect(() => {
+    getEmpatAnalisis({ access_token: access_token ?? '' })
+    .then((data) => {
+        setEmpatAnalisis(data);
+    })
+    .catch((error) => {
+        console.error("Error fetching laporan:", error);
+    });
+  }, [])
+
+  useEffect(() => {
+    RekomendasiBerandaPemerintah({ access_token: access_token ?? '' })
+    .then((data) => {
+        setBerandaRekomendasi(data);
+    })
+    .catch((error) => {
+        console.error("Error fetching laporan:", error);
+    });
+  }, [])
   
   // Data for the pie chart
   const pieChartData = [
-    { name: "Total Reports", value: 30, color: "#bfdbfe" },
-    { name: "Current Recommendations", value: 4, color: "#a855f7" },
-    { name: "Validated Recommendations", value: 9, color: "#22c55e" },
-    { name: "Needs Validation", value: 12, color: "#f59e0b" },
+    { name: "Total Laporan Terkini :", value: empatAnalisis?.total_laporan_terkini ?? 0, color: "#bfdbfe" },
+    { name: "Rekomendasi Terkini :", value: empatAnalisis?.total_rekomendasi_terkini ?? 0, color: "#a855f7" },
+    { name: "Rekomendasi Tervalidasi :", value: empatAnalisis?.total_rekomendasi_valid ?? 0, color: "#22c55e" },
+    { name: "Rekomendasi Butuh Validasi :", value: empatAnalisis?.total_rekomendasi_belumvalid ?? 0, color: "#f59e0b" },
   ];
 
   return (
@@ -49,7 +74,7 @@ const Dashboard = () => {
               <TriangleAlert className="h-6 w-6 text-red-600" />
               <h2 className="text-lg font-semibold text-red-600">Tangani Segera</h2>
             </div>
-            <CardList />
+            <CardList rekomendasiData={berandarekomendasi}/>
           </div>
         </div>
 
@@ -60,19 +85,19 @@ const Dashboard = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
               <div className="bg-blue-100 dark:bg-blue-900/30 p-3 md:p-4 rounded-lg border border-blue-200 dark:border-blue-800">
                 <h3 className="text-xs md:text-sm font-medium">Jumlah Laporan Terkini</h3>
-                <p className="text-xl md:text-2xl font-bold mt-1">30</p>
+                <p className="text-xl md:text-2xl font-bold mt-1">{empatAnalisis?.total_laporan_terkini}</p>
               </div>
               <div className="bg-purple-100 dark:bg-purple-900/30 p-3 md:p-4 rounded-lg border border-purple-200 dark:border-purple-800">
                 <h3 className="text-xs md:text-sm font-medium">Rekomendasi Terkini</h3>
-                <p className="text-xl md:text-2xl font-bold mt-1">4</p>
+                <p className="text-xl md:text-2xl font-bold mt-1">{empatAnalisis?.total_rekomendasi_terkini}</p>
               </div>
               <div className="bg-green-100 dark:bg-green-900/30 p-3 md:p-4 rounded-lg border border-green-200 dark:border-green-800">
                 <h3 className="text-xs md:text-sm font-medium">Rekomendasi Tervalidasi</h3>
-                <p className="text-xl md:text-2xl font-bold mt-1">9</p>
+                <p className="text-xl md:text-2xl font-bold mt-1">{empatAnalisis?.total_rekomendasi_valid}</p>
               </div>
               <div className="bg-amber-100 dark:bg-amber-900/30 p-3 md:p-4 rounded-lg border border-amber-200 dark:border-amber-800">
                 <h3 className="text-xs md:text-sm font-medium">Rekomendasi Butuh Validasi</h3>
-                <p className="text-xl md:text-2xl font-bold mt-1">12</p>
+                <p className="text-xl md:text-2xl font-bold mt-1">{empatAnalisis?.total_rekomendasi_belumvalid}</p>
               </div>
             </div>
           </div>

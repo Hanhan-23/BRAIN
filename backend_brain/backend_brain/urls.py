@@ -64,5 +64,6 @@ urlpatterns = [
     # Pemerintah
     path('berandapemerintah/analisis', viewspemerintah.berandaAnalisis, name='berandapemerintahanalisis'),
     path('berandapemerintah/statistik', viewspemerintah.statistikLaporanPemerintah, name='statistikberandapemerintahanalisis'),
+    path('berandapemerintah/rekomendasi', viewspemerintah.rekomendasiBerandaPemerintah, name='rekomendasiberandapemerintah'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

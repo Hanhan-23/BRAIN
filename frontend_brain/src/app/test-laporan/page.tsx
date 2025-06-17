@@ -2,7 +2,7 @@
 
 import { useGoogleLogin } from '@react-oauth/google';
 import { useEffect } from 'react';
-import { getCardRekomendasiUtama } from '@/services/utamaservice';
+import { getCardRekomendasiUtama } from '@/services/masyarakatservices/utamaservice';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 
