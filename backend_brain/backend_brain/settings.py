@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'backend_brain.petahandlers',
     'backend_brain.rekomendasihandlers',
     'backend_brain.analisishandlers',
+    'backend_brain.pemerintahhandlers',
 
     'django.contrib.admin',
     'django.contrib.auth',

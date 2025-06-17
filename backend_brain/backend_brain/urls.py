@@ -20,6 +20,7 @@ from backend_brain.apps import views as viewsapps
 from backend_brain.laporanhandlers import views as viewslaporan
 from backend_brain.rekomendasihandlers import views as viewsrekomendasi
 from backend_brain.analisishandlers import views as viewsanalisis
+from backend_brain.pemerintahhandlers import views as viewspemerintah
 from backend_brain.authhandlers.views import GoogleLoginView, GoogleRefreshToken
 from django.conf import settings
 from django.conf.urls.static import static
@@ -59,5 +60,9 @@ urlpatterns = [
     # Rekomendasi
     path('rekomendasi/requests', viewsrekomendasi.getRekomendasiRequest, name='rekomendasirequests'),
     path('rekomendasi/detail/<int:id_rekomendasi>', viewsrekomendasi.getDetailRekomendasi, name='detailrekomendasi'),
+
+    # Pemerintah
+    path('berandapemerintah/analisis', viewspemerintah.berandaAnalisis, name='berandapemerintahanalisis'),
+    path('berandapemerintah/statistik', viewspemerintah.statistikLaporanPemerintah, name='statistikberandapemerintahanalisis'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
