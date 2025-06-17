@@ -29,7 +29,7 @@ import { CardLaporanHistory } from '../../types/masyarakattypes/berandatype'
 import { useState, useEffect } from "react";
 
 import { Button } from "../ui/button";
-import { getHistoryLaporan } from "@/services/berandaservice";
+import { getHistoryLaporan } from "@/services/masyarakatservices/berandaservice";
 
 const data = {
   user: {
