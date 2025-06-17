@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { ChartAreaInteractive } from "@/components/ui/chart_statistic";
 import { Input } from "@/components/ui/input";
@@ -24,41 +24,51 @@ import {
   } from "@phosphor-icons/react";
 import { StatistikLaporanUtama, CardLaporanItemUtama } from "@/types/masyarakattypes/utamatype";
 import { useState, useEffect } from "react";
-import { statistikLaporanUtama,getCardLaporanUtama } from "@/services/utamaservice";
+import {
+  statistikLaporanUtama,
+  getCardLaporanUtama,
+} from "@/services/utamaservice";
 
 import ListLaporan from "@/components/landing_page/laporan_section";
 
 const LaporanPage = () => {
-  const [statistikLaporan, setStatistikLaporan] = useState<StatistikLaporanUtama[]>([]);
+  const [statistikLaporan, setStatistikLaporan] = useState<
+    StatistikLaporanUtama[]
+  >([]);
 
-    useEffect(() => {
-          statistikLaporanUtama()
-          .then((data) => {
-              setStatistikLaporan(data);
-          })
-          .catch((error) => {
-              console.error("Error fetching laporan:", error);
-          });
-      }, []);
+  useEffect(() => {
+    statistikLaporanUtama()
+      .then((data) => {
+        setStatistikLaporan(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching laporan:", error);
+      });
+  }, []);
 
   const [laporan, setLaporan] = useState<CardLaporanItemUtama[]>([]);
 
-      useEffect(() => {
-          getCardLaporanUtama()
-          .then((data) => {
-              setLaporan(data);
-          })
-          .catch((error) => {
-              console.error("Error fetching laporan:", error);
-          });
-      }, []);
+  useEffect(() => {
+    getCardLaporanUtama()
+      .then((data) => {
+        setLaporan(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching laporan:", error);
+      });
+  }, []);
 
   return (
     <div className="flex flex-1 flex-col">
       <div className="@container/main flex flex-1 flex-col gap-2">
         <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
           <div className="px-4 lg:px-6">
-            <ChartAreaInteractive itemStatistik={statistikLaporan}/>
+            <ChartAreaInteractive
+              itemStatistik={statistikLaporan}
+              title="Statistik"
+              titleSize="text-4xl"
+              showDescription={true}
+            />
           </div>
           <div className="flex px-4 lg:px-6">
             <Input
@@ -103,7 +113,9 @@ const LaporanPage = () => {
                   </PaginationLink>
                 </PaginationItem>
                 <PaginationItem>
-                  <PaginationLink href="#" className="">1</PaginationLink>
+                  <PaginationLink href="#" className="">
+                    1
+                  </PaginationLink>
                 </PaginationItem>
                 <PaginationItem>
                   <PaginationLink href="#" isActive>

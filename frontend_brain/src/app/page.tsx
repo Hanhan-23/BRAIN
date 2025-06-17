@@ -81,7 +81,7 @@ export default function Home() {
                 <ListLaporan item={laporan} className={
                     "grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4"
                     } />
-                <div className="flex justify-end">
+                <div className="flex justify-end mt-6">
                     <Button showButton={true} className="bg-blue-600 hover:bg-blue-700 text-white rounded-full">Lihat semua</Button>
                 </div>
             </section>
@@ -89,7 +89,7 @@ export default function Home() {
                 <ListRekomendasi item={rekomendasi} className={
                     "grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4"
                 }/>
-                <div className="flex justify-end">
+                <div className="flex justify-end mt-6">
                     <Button showButton={true} className="bg-blue-600 hover:bg-blue-700 text-white rounded-full">Lihat semua</Button>
                 </div>
             </section>

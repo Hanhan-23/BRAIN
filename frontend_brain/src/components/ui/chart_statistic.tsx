@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
+import * as React from "react";
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
 import {
   Card,
@@ -9,15 +9,15 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
-  ChartLegend,  
+  ChartLegend,
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
+} from "@/components/ui/chart";
 import {
   Select,
   SelectContent,
@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/select"
 import { StatistikLaporanUtama } from "@/types/masyarakattypes/utamatype"
 
-export const description = "An interactive area chart"
+export const description = "An interactive area chart";
 
 const chartData = [
   { date: "2024-04-01", desktop: 222, mobile: 150 },
@@ -121,7 +121,7 @@ const chartData = [
   { date: "2024-06-28", desktop: 149, mobile: 200 },
   { date: "2024-06-29", desktop: 103, mobile: 160 },
   { date: "2024-06-30", desktop: 446, mobile: 400 },
-]
+];
 
 const chartConfig = {
   visitors: {
@@ -135,39 +135,55 @@ const chartConfig = {
     label: "Laporan Divalidasi",
     color: "var(--chart-blue-1)",
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
-export function ChartAreaInteractive({itemStatistik} : { itemStatistik: StatistikLaporanUtama[] }) {
+interface ChartAreaInteractiveProps {
+  itemStatistik: StatistikLaporanUtama[];
+  title: string;
+  titleSize?: "text-xl" | "text-2xl" | "text-3xl" | "text-4xl" | "text-5xl"; // opsi ukuran
+  showDescription?: boolean;
+}
+
+export function ChartAreaInteractive({
+  itemStatistik,
+  title,
+  titleSize = "text-3xl",
+  showDescription = true,
+}: ChartAreaInteractiveProps) {
   const mappedData = itemStatistik.map((item) => ({
     date: item.date,
-    desktop: item.laporanmasuk, 
-    mobile:  item.laporanvalid, 
-  }))
+    desktop: item.laporanmasuk,
+    mobile: item.laporanvalid,
+  }));
 
-  const [timeRange, setTimeRange] = React.useState("7d")
+  const [timeRange, setTimeRange] = React.useState("7d");
 
   const filteredData = mappedData.filter((item) => {
-    const date = new Date(item.date)
-    const referenceDate = new Date("2024-06-30")
-    let daysToSubtract = 90
+    const date = new Date(item.date);
+    const referenceDate = new Date("2024-06-30");
+    let daysToSubtract = 90;
     if (timeRange === "30d") {
-      daysToSubtract = 30
+      daysToSubtract = 30;
     } else if (timeRange === "7d") {
-      daysToSubtract = 7
+      daysToSubtract = 7;
     }
-    const startDate = new Date(referenceDate)
-    startDate.setDate(startDate.getDate() - daysToSubtract)
-    return date >= startDate
-  })
+    const startDate = new Date(referenceDate);
+    startDate.setDate(startDate.getDate() - daysToSubtract);
+    return date >= startDate;
+  });
 
   return (
     <Card className="pt-0 rounded-3xl">
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1 max-w-sm">
-          <CardTitle className="text-3xl font-semibold mb-2 md:text-4xl lg:text-5xl">Statistik</CardTitle>
-          <CardDescription className="text-black text-[10px] md:text-xs lg:text-sm">
-            Memberikan gambaran komprehensif terkait intensitas dan persebaran laporan kerusakan jalan dari masyarakat. 
-          </CardDescription>
+          <CardTitle className={`${titleSize} font-semibold mb-2`}>
+            {title}
+          </CardTitle>
+          {showDescription && (
+            <CardDescription className="text-black text-[10px] md:text-xs lg:text-sm">
+              Memberikan gambaran komprehensif terkait intensitas dan persebaran laporan kerusakan jalan dari masyarakat.
+            </CardDescription>
+          )}
         </div>
         <Select value={timeRange} onValueChange={setTimeRange}>
           <SelectTrigger
@@ -229,11 +245,11 @@ export function ChartAreaInteractive({itemStatistik} : { itemStatistik: Statisti
               tickMargin={8}
               minTickGap={32}
               tickFormatter={(value) => {
-                const date = new Date(value)
+                const date = new Date(value);
                 return date.toLocaleDateString("en-US", {
                   month: "short",
                   day: "numeric",
-                })
+                });
               }}
             />
             <ChartTooltip
@@ -244,7 +260,7 @@ export function ChartAreaInteractive({itemStatistik} : { itemStatistik: Statisti
                     return new Date(value).toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",
-                    })
+                    });
                   }}
                   indicator="dot"
                 />
@@ -269,5 +285,5 @@ export function ChartAreaInteractive({itemStatistik} : { itemStatistik: Statisti
         </ChartContainer>
       </CardContent>
     </Card>
-  )
+  );
 }
